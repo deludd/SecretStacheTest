@@ -1,15 +1,18 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import Header from './Header'
+import styled from 'styled-components'; // Импортируйте styled-components
 
-import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+// Создайте стилизованный компонент для вашего Layout
+const Container = styled.div`
+  max-width: 960px; /* Максимальная ширина контейнера */
+  margin: 0 auto; /* Центрирование контейнера по горизонтали */
+  padding: 0 20px; /* Внутренний отступ контейнера */
 
-import Header from "./header"
-import "./layout.css"
+  .main-content {
+    margin-top: 20px; /* Отступ между Header и основным контентом */
+  }
+`;
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,26 +27,13 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+      <Header siteTitle={data.site.siteMetadata.title} />
+      {/* Используйте стилизованный компонент */}
+      <Container>
+        <main className="main-content">
+          {children}
+        </main>
+      </Container>
     </>
   )
 }
