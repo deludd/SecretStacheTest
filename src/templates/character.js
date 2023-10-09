@@ -3,8 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Seo from '../components/SEO'
 
-const InnerPage = ({ data }) => {
-
+const Character = ({ data }) => {
   const character = data.rickandmorty.character
 
   return (
@@ -15,12 +14,13 @@ const InnerPage = ({ data }) => {
         <button onClick={() => window.history.back()}>Back</button>
         <img src={character.image} alt={character.name} />
         <p>Created: {character.created}</p>
+        <p> {character.gender}</p>
       </div>
     </Layout>
   )
 }
 
-export default InnerPage
+export default Character
 
 export const pageQuery = graphql`
   query($id: ID!) {
@@ -30,6 +30,7 @@ export const pageQuery = graphql`
         name
         image
         created
+        gender
       }
     }
   }

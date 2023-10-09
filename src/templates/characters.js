@@ -5,56 +5,56 @@ import Seo from '../components/SEO'
 import CharacterCard from '../components/CharacterCard'
 import styled from 'styled-components'
 
-// Создайте стилизованный компонент для контейнера карточек персонажей
 const CharacterGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 карточки в ряд */
-  gap: 20px; /* Расстояние между карточками */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 `;
 
-// Создайте стилизованный компонент для карточки персонажа
 const CharacterCardContainer = styled.div`
-  /* Стили для карточки персонажа, например, ширина и высота */
-  width: 100%; /* Ширина карточки на всю доступную ширину */
+  width: 100%;
 `;
 
-const Characters = ({ pageContext, data }) => {
+export default function Characters({ pageContext, data }) {
   const {
     rickandmorty: {
-      characters: { results: charactersData },
+      characters: { results: charactersData, info },
     },
   } = data
 
-  // Добавьте параметры perPage и skip
-  const perPage = 6
-  const skip = (pageContext.page - 1) * perPage
-  const charactersToDisplay = charactersData.slice(skip, skip + perPage)
+  const perPage = 42
+  const totalPages = info.pages
+  const currentPage = pageContext.page
+  const charactersToDisplay = charactersData.slice((currentPage - 1) * perPage, currentPage * perPage);
 
-  const renderCard = () => {
-    return charactersToDisplay.map(character => {
-      return (
-        <CharacterCardContainer key={character.id}>
-          <CharacterCard data={character} />
-        </CharacterCardContainer>
-      )
-    })
-  }
 
   const renderNavButtons = () => {
-    const previousPage = pageContext.page - 1
-    const nextPage = pageContext.page + 1
-    console.log(previousPage)
+    const previousPage = currentPage - 1
+    const nextPage = currentPage + 1
+
+    const pageNumbers = [];
+    for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+      if (i > 0 && i <= totalPages) {
+        pageNumbers.push(i);
+      }
+    }
 
     return (
       <div className="nav-buttons">
-        <Link to={`/characters/page/${previousPage}`} disabled={previousPage === 1}>
-          Previous
+        <Link to={`/characters/page/${previousPage}`} className={previousPage === 0 ? 'disabledButton' : 'button'}>
+          &larr; Previous page
         </Link>
-        <span className="page-info">
-          Page {pageContext.page} of {pageContext.totalPage}
-        </span>
-        <Link to={`/characters/page/${nextPage}`} disabled={nextPage > pageContext.totalPage}>
-          Next
+        {pageNumbers.map(pageNumber => (
+          <Link
+            key={pageNumber}
+            to={`/characters/page/${pageNumber}`}
+            className={currentPage === pageNumber ? 'currentPageNumber' : 'pageNumber'}
+          >
+            {pageNumber}
+          </Link>
+        ))}
+        <Link to={`/characters/page/${nextPage}`} className={nextPage > totalPages ? 'disabledButton' : 'button'}>
+          Next page &rarr;
         </Link>
       </div>
     )
@@ -66,7 +66,15 @@ const Characters = ({ pageContext, data }) => {
         <div className="title">
           <h2>Characters</h2>
         </div>
-        <CharacterGrid>{renderCard()}</CharacterGrid>
+        <CharacterGrid>
+        {charactersToDisplay.map(character => (
+          <CharacterCardContainer key={character.id}>
+            <Link to={`/characters/page/${currentPage}/${character.id}`}>
+              <CharacterCard data={character}/>
+            </Link>
+          </CharacterCardContainer>
+        ))}
+        </CharacterGrid>
         {renderNavButtons()}
       </>
     )
@@ -80,16 +88,19 @@ const Characters = ({ pageContext, data }) => {
   )
 }
 
-export default Characters
-
 export const pageQuery = graphql`
   query($page: Int!) {
     rickandmorty {
       characters(page: $page) {
+        info {
+          pages
+        }
         results {
           id
           name
           image
+          gender
+          created
         }
       }
     }

@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-// import './Header.css'; // Подключите ваш файл стилей CSS здесь
-
 const Header = () => {
   return (
     <>
