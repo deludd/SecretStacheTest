@@ -9,10 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `SecretStache test task`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `Artem Dymytrov <adimitrov2000@gmail.com>`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `SecretStache Anime Website`,
+    description: `Discover and explore your favorite anime.`,
+    author: `Artem Dymytrov <adimitrov200@gmail.com>`,
+    siteUrl: `https://your-site-url.com/`,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -29,9 +29,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/characters/page/1`,
+        name: `gatsby-starter-anime`,
+        short_name: `anime`,
+        start_url: `/anime/page=1`,
         background_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`,
@@ -40,10 +40,10 @@ module.exports = {
     {
       resolve: 'gatsby-source-graphql',
       options: {
-        typeName: 'RICKANDMORTY',
-        fieldName: 'rickandmorty',
-        url: 'https://rickandmortyapi.com/graphql',
+        typeName: 'ANILIST',
+        fieldName: 'anilist',
+        url: 'https://graphql.anilist.co',
       },
     },
   ],
-}
+};

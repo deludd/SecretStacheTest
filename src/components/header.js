@@ -9,7 +9,7 @@ const Header = () => {
           <div className="siteTitle">
             <h6 className="title">
               <Link to="/" className="navLink">
-                Rick N Morty
+                StacheAnime
               </Link>
             </h6>
           </div>

@@ -1,16 +1,16 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "stache-anime",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A simple Anime site",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Artem Dymytrov <adimitrov2000@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^2.1.4",
     "gatsby": "^5.12.4",
-    "gatsby-paginate": "^1.1.1",
     "gatsby-plugin-image": "^3.12.0",
     "gatsby-plugin-local-search": "^2.0.1",
     "gatsby-plugin-manifest": "^5.12.0",
+    "gatsby-plugin-paginated-collection": "^0.2.3",
     "gatsby-plugin-react-helmet": "^6.12.0",
     "gatsby-plugin-sharp": "^5.12.0",
     "gatsby-plugin-styled-components": "^6.12.0",
@@ -18,13 +18,12 @@
     "gatsby-source-graphql": "^5.12.0",
     "gatsby-transformer-json": "^5.12.0",
     "gatsby-transformer-sharp": "^5.12.0",
-    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-use-flexsearch": "^0.1.1",
-    "styled-components": "^6.0.8"
+    "react-use-flexsearch": "^0.1.1"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.22.15",
     "prettier": "^2.8.8"
   },
   "keywords": [
