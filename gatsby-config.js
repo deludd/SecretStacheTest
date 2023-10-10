@@ -38,6 +38,23 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-omni-font-loader`,
+      options: {
+        enableListener: true,
+        preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+        web: [
+          {
+            name: `Tajawal`,
+            file: `https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap`,
+          },
+          {
+            name: `Bree Serif`,
+            file: `https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap`,
+          },
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-source-graphql',
       options: {
         typeName: 'ANILIST',

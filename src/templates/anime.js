@@ -18,10 +18,9 @@ const AnimeCardContainer = styled.div`
 
 const Anime = ({ data, pageContext }) => {
   const animeData = data.anilist.Page.media;
-  console.log(animeData)
   const currentPage = pageContext.currentPage;
   const numPages = pageContext.totalPages;
-  const basePath = `/anime/page`;
+  const basePath = '/anime';
 
   const animeList = animeData.slice(0, 6);
 
@@ -34,7 +33,7 @@ const Anime = ({ data, pageContext }) => {
       <AnimeGrid>
         {animeList.map((anime) => (
           <AnimeCardContainer key={anime.id}>
-            <Link to={`${basePath}=${currentPage}/anime_id=${anime.id}`}>
+            <Link to={`${basePath}/id=${anime.id}`}>
               <SingleAnimeCard data={anime} />
             </Link>
           </AnimeCardContainer>
@@ -48,19 +47,25 @@ const Anime = ({ data, pageContext }) => {
 export default Anime;
 
 export const pageQuery = graphql`
-query AnimePage($skip: Int!) {
-  anilist {
-    Page(page: $skip, perPage: 6) {
-      media(type: ANIME) {
-        id
-        title {
-          romaji
-        }
-        coverImage {
-          large
+  query($skip: Int!, $limit: Int!) {
+    anilist {
+      Page(page: $skip, perPage: $limit) {
+        media(type: ANIME) {
+          id
+          title {
+            romaji
+          }
+          coverImage {
+            large
+          }
+          startDate {
+            year
+            month
+            day
+          }
+          description
         }
       }
     }
   }
-}
 `;

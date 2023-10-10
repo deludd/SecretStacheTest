@@ -26,6 +26,7 @@ export const pageQuery = graphql`
   query($id: Int!) {
     anilist {
       Media(id: $id) {
+        id
         title {
           romaji
         }
