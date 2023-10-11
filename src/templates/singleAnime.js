@@ -12,10 +12,13 @@ import {
   BackButton,
 } from '../styles/SingleAnimePageStyles';
 
-const SingleAnime = ({ data }) => {
+const SingleAnime = ({ data, errors }) => {
   const anime = data.anilist.Media;
 
-  console.log(anime);
+  if (errors) {
+    console.error(errors);
+    return null;
+  }
 
   return (
     <Layout>

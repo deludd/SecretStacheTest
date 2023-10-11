@@ -13,7 +13,7 @@ import {
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
 
-const Anime = ({ data, pageContext }) => {
+const Anime = ({ data, pageContext, errors }) => {
   const animeData = data.anilist.Page.media;
   const currentPage = pageContext.currentPage;
   const numPages = pageContext.totalPages;
@@ -39,7 +39,10 @@ const Anime = ({ data, pageContext }) => {
     },
   ];
 
-  console.log(animeData);
+  if (errors) {
+    console.error(errors);
+    return null; 
+  }
 
   return (
     <Layout>
