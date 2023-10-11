@@ -3,8 +3,25 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const animePerPage = 6;
   const filters = ['all', 'chapters', 'popularity', 'views'];
-
-  const totalCountQuery = await graphql(`
+  const MAX_RETRIES = 3;
+  const DELAY_INCREMENT = 1000;  // 1 second
+  
+  const fetchWithRetry = async (query, variables, retryCount = 0) => {
+    try {
+      return await graphql(query, variables);
+    } catch (error) {
+      if (error.message.includes('429') && retryCount < MAX_RETRIES) {
+        const delay = (retryCount + 1) * DELAY_INCREMENT;
+        console.warn(`Rate limit hit. Retrying after ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return fetchWithRetry(query, variables, retryCount + 1);
+      } else {
+        throw error;
+      }
+    }
+  };
+  
+  const totalCountQuery = await fetchWithRetry(`
     query AnimePageCount {
       anilist {
         SiteStatistics {
@@ -16,7 +33,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `);
+  `, {});
 
   if (totalCountQuery.errors) {
     console.error("Error fetching total count:", totalCountQuery.errors);
@@ -63,7 +80,7 @@ exports.createPages = async ({ graphql, actions }) => {
     for (let i = 0; i < Math.ceil(totalCount / bigPerPage); i++) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       requests.push(
-        graphql(`
+        fetchWithRetry(`
           query AnimePage($page: Int!) {
             anilist {
               Page(page: $page, perPage: ${bigPerPage}) {

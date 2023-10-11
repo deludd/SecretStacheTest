@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import Layout from "../components/Layout";
-import Seo from "../components/SEO";
-import SingleAnimeCard from "../components/SingleAnimeCard";
-import Pagination from "../components/Pagination";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
+import SingleAnimeCard from "../components/singleAnimeCard";
+import Pagination from "../components/paginationBar";
 
 import {
   AnimeGrid,
