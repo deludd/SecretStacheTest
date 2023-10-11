@@ -31,7 +31,7 @@ module.exports = {
       options: {
         name: `gatsby-starter-anime`,
         short_name: `anime`,
-        start_url: `/anime/page=1`,
+        start_url: `/`,
         background_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`,
