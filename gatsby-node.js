@@ -4,7 +4,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const animePerPage = 6;
   const filters = ['all', 'chapters', 'popularity', 'views'];
   const MAX_RETRIES = 3;
-  const DELAY_INCREMENT = 1000;  // 1 second
+  const DELAY_INCREMENT = 1000;
   
   const fetchWithRetry = async (query, variables, retryCount = 0) => {
     try {
