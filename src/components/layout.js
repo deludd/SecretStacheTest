@@ -1,18 +1,8 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Header from './Header'
-import styled from 'styled-components';
 
-
-const Container = styled.div`
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  .main-content {
-    margin-top: 20px;
-  }
-`;
+import { GlobalStyles, Container } from '../styles/LayoutSyles'
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -27,9 +17,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <GlobalStyles />
       <Header siteTitle={data.site.siteMetadata.title} />
       <Container>
-        <main className="main-content">
+        <main>
           {children}
         </main>
       </Container>

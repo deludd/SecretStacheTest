@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import {
+  PaginationContainer,
+  PaginationList,
+  StyledLink,
+  NextPage,
+  PreviousPage,
+} from "../styles/PaginationStyles";
 
 const Pagination = ({ currentPage, numPages, basePath, filter }) => {
   const [pageNumbers, setPageNumbers] = useState([]);
@@ -29,7 +34,6 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
   );
 
   return (
-    <nav className="pagination">
       <PaginationContainer>
         {currentPage !== 1 && prevPage}
         <PaginationList>
@@ -41,77 +45,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
         </PaginationList>
         {nextPage}
       </PaginationContainer>
-    </nav>
   );
 };
-
-const PaginationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PreviousPage = styled(Link)`
-  display: inline-block;
-  padding: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 0;
-  cursor: pointer;
-  vertical-align: middle;
-  text-decoration: none;
-
-  &.active {
-    background-color: #000;
-    color: #fff;
-  }
-`;
-
-const NextPage = styled(Link)`
-  display: inline-block;
-  padding: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 0;
-  cursor: pointer;
-  vertical-align: middle;
-  text-decoration: none;
-
-  &.active {
-    background-color: #000;
-    color: #fff;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-
-  &.active {
-    background-color: #000;
-    color: white;
-  }
-`;
-
-const PaginationList = styled.ul`
-  list-style: none;
-  padding: 10px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-
-  li {
-    display: inline-block;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 0;
-    cursor: pointer;
-
-    &.active {
-      background-color: #000;
-      color: white;
-    }
-  }
-`;
 
 export default Pagination;

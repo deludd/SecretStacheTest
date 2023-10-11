@@ -1,37 +1,18 @@
-import React from 'react';
-import { graphql, Link } from 'gatsby';
-import Layout from '../components/Layout';
-import Seo from '../components/SEO';
-import styled from 'styled-components';
-import SingleAnimeCard from '../components/SingleAnimeCard';
-import Pagination from '../components/Pagination';
+import React from "react";
+import { graphql, Link } from "gatsby";
+import Layout from "../components/Layout";
+import Seo from "../components/SEO";
+import SingleAnimeCard from "../components/SingleAnimeCard";
+import Pagination from "../components/Pagination";
 
-const AnimeGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-`;
+import {
+  AnimeGrid,
+  AnimeCardContainer,
+  AnimeFilters,
+  AnimeFilterItem,
+  AnimeFilterLink,
+} from "../styles/AnimePageStyles";
 
-const AnimeCardContainer = styled.div`
-  width: 100%;
-`;
-
-const AnimeFilters = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style-type: none;
-  margin-top: 20px;
-`;
-
-const AnimeFilterItem = styled.li`
-  margin: 0 10px;
-`;
-
-const AnimeFilterLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-`;
 
 const Anime = ({ data, pageContext }) => {
   const animeData = data.anilist.Page.media;
@@ -46,15 +27,15 @@ const Anime = ({ data, pageContext }) => {
       value: 'all',
     },
     {
-      name: 'По дате выхода',
+      name: 'Chapters',
       value: 'chapters',
     },
     {
-      name: 'По рейтингу',
+      name: 'Popularity',
       value: 'popularity',
     },
     {
-      name: 'По количеству просмотров',
+      name: 'Views',
       value: 'views',
     },
   ];
@@ -64,8 +45,6 @@ const Anime = ({ data, pageContext }) => {
   return (
     <Layout>
       <Seo title="Anime" />
-      <h1>Anime</h1>
-
       <AnimeFilters>
         {filters.map((filter) => (
           <AnimeFilterItem key={filter.value}>
@@ -82,7 +61,7 @@ const Anime = ({ data, pageContext }) => {
             <Link to={`${basePath}/id=${anime.id}`}>
               <SingleAnimeCard data={anime} />
             </Link>
-          </AnimeCardContainer>
+          </AnimeCardContainer>      
         ))}
       </AnimeGrid>
       <Pagination currentPage={currentPage} filter={currentFilter} numPages={numPages} basePath={basePath} />

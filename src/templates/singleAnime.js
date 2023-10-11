@@ -1,7 +1,16 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
-import Seo from '../components/SEO';
+import React from "react";
+import { graphql } from "gatsby";
+import Layout from "../components/Layout";
+import Seo from "../components/SEO";
+
+import {
+  AnimeContainer,
+  AnimeTitle,
+  AnimeImage,
+  AnimeDate,
+  AnimeDescription,
+  BackButton,
+} from "../styles/SingleAnimePageStyles";
 
 const SingleAnime = ({ data }) => {
   const anime = data.anilist.Media;
@@ -11,13 +20,13 @@ const SingleAnime = ({ data }) => {
   return (
     <Layout>
       <Seo title={anime.title.romaji} />
-      <div>
-        <h2>{anime.title.romaji}</h2>
-        <button onClick={() => window.history.back()}>Back</button>
-        <img src={anime.coverImage.large} alt={anime.title.romaji} />
-        <p>Start Date: {anime.startDate.year}-{anime.startDate.month}-{anime.startDate.day}</p>
-        <p>{anime.description}</p>
-      </div>
+      <AnimeContainer>
+        <BackButton onClick={() => window.history.back()}>Back</BackButton>
+        <AnimeTitle>{anime.title.romaji}</AnimeTitle>
+        <AnimeImage src={anime.coverImage.large} alt={anime.title.romaji} />
+        <AnimeDate>Start Date: {anime.startDate.year}-{anime.startDate.month}-{anime.startDate.day}</AnimeDate>
+        <AnimeDescription>{anime.description}</AnimeDescription>
+      </AnimeContainer>
     </Layout>
   );
 };

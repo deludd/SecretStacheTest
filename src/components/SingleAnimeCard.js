@@ -1,13 +1,15 @@
 import React from 'react';
 
+import {AnimeCardContainer, AnimeTitle} from '../styles/SingleAnimeComponentStyles';
+
 const SingleAnimeCard = ({ data: { title, coverImage } }) => {
   return (
-    <div>
+    <AnimeCardContainer>
       <img src={coverImage.large} alt={title.romaji} />
-      <div>
+      <AnimeTitle>
         <h2>{title.romaji}</h2>
-      </div>
-    </div>
+      </AnimeTitle>
+    </AnimeCardContainer>
   );
 };
 
