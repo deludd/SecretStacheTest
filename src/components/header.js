@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React from "react"
+import { Link } from "gatsby"
 
-import { HeaderWrapper, NavItem, NavList,Logo } from '../styles/HeaderStyles'
+import { HeaderWrapper, NavItem, NavList, Logo } from "../styles/HeaderStyles"
 
 const Header = () => {
   return (

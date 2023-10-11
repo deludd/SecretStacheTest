@@ -41,7 +41,10 @@ module.exports = {
       resolve: `gatsby-omni-font-loader`,
       options: {
         enableListener: true,
-        preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+        preconnect: [
+          `https://fonts.googleapis.com`,
+          `https://fonts.gstatic.com`,
+        ],
         web: [
           {
             name: `Tajawal`,
@@ -55,12 +58,12 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-graphql',
+      resolve: "gatsby-source-graphql",
       options: {
-        typeName: 'ANILIST',
-        fieldName: 'anilist',
-        url: 'https://graphql.anilist.co',
+        typeName: "ANILIST",
+        fieldName: "anilist",
+        url: "https://graphql.anilist.co",
       },
     },
   ],
-};
+}

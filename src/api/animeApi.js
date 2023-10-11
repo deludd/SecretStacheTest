@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios"
 
 const base = axios.create({
-  baseURL: 'https://graphql.anilist.co',
-});
+  baseURL: "https://graphql.anilist.co",
+})
 
-export const fetchAnime = (page) => {
+export const fetchAnime = page => {
   const query = `
     query {
       anilist {
@@ -21,7 +21,7 @@ export const fetchAnime = (page) => {
         }
       }
     }
-  `;
+  `
 
-  return base.post('', { query });
-};
+  return base.post("", { query })
+}

@@ -2,7 +2,7 @@
 
 // const useCustomStaticQuery = (id) => {
 //   const data = useStaticQuery(graphql`
-//     query CustomQuery($id: Int!) { 
+//     query CustomQuery($id: Int!) {
 //       anilist {
 //         Media(id: $id) {
 //           id
@@ -22,7 +22,7 @@
 //       }
 //     }
 //   `, { variables: { id } });
-  
+
 //   return data;
 // };
 
