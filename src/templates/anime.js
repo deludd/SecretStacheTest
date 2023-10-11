@@ -76,10 +76,10 @@ const Anime = ({ data, pageContext }) => {
 export default Anime;
 
 export const pageQuery = graphql`
-  query ($skip: Int!, $limit: Int!, $sort: [ANILIST_MediaSort]) {
+  query ($skip: Int!, $limit: Int!, $sort: [ANILIST_MediaSort], $id_in: [Int]) {
     anilist {
       Page(page: $skip, perPage: $limit) {
-        media(type: ANIME, sort: $sort) {
+        media(type: ANIME, sort: $sort, id_in: $id_in) {
           id
           title {
             romaji
