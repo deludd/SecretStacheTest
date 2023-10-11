@@ -38,53 +38,56 @@ exports.createPages = async ({ graphql, actions }) => {
     return sortMapping[filter] ? [sortMapping[filter]] : null;
   };
 
-  for (const filter of filters) {
-    for (let i = 0; i < totalPages; i++) {
-      createPage({
-        path: `/anime/${filter}/page=${i + 1}`,
-        component: animePageTemplate,
-        context: {
-          skip: i * animePerPage,
-          limit: animePerPage,
-          currentPage: i + 1,
-          totalPages,
-          sort: getSortArrayFromFilter(filter),
-          currentFilter: filter,
-        },
-      });
+  const generateAnimePages = () => {
+    for (const filter of filters) {
+      for (let i = 0; i < totalPages; i++) {
+        createPage({
+          path: `/anime/${filter}/page=${i + 1}`,
+          component: animePageTemplate,
+          context: {
+            skip: i * animePerPage,
+            limit: animePerPage,
+            currentPage: i + 1,
+            totalPages,
+            sort: getSortArrayFromFilter(filter),
+            currentFilter: filter,
+          },
+        });
+      }
     }
-  }
+  };
 
-  const animeIDs = [];
-
-  for (let i = 0; i < totalPages; i++) {
-    const animeDataQuery = await graphql(`
-      query AnimePage($page: Int!) {
-        anilist {
-          Page(page: $page, perPage: 6) {
-            media(type: ANIME) {
-              id
+  const getAllAnimeIDs = async () => {
+    const bigPerPage = 50;
+    const requests = [];
+    for (let i = 0; i < Math.ceil(totalCount / bigPerPage); i++) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      requests.push(
+        graphql(`
+          query AnimePage($page: Int!) {
+            anilist {
+              Page(page: $page, perPage: ${bigPerPage}) {
+                media(type: ANIME) {
+                  id
+                }
+              }
             }
           }
-        }
-      }
-    `, {
-      page: i + 1,
-    });
-
-    if (animeDataQuery.errors) {
-      console.error("Error fetching anime data:", animeDataQuery.errors);
-      continue;
+        `, {
+          page: i + 1,
+        })
+      );
     }
+    const results = await Promise.all(requests);
+    const animeIDs = results.flatMap(result => 
+      result.data.anilist.Page.media.map(anime => anime.id)
+    );
+    return animeIDs;
+  };
 
-    const media = animeDataQuery.data.anilist.Page.media;
-    if (media) {
-      animeIDs.push(...media.map((anime) => anime.id));
-    } else {
-      console.error('The media property is null or undefined');
-    }
-  }
+  generateAnimePages();
 
+  const animeIDs = await getAllAnimeIDs();
   for (const id of animeIDs) {
     createPage({
       path: `/anime/id=${id}`,
