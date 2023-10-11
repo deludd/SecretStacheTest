@@ -6,6 +6,8 @@ import Seo from '../components/SEO';
 const SingleAnime = ({ data }) => {
   const anime = data.anilist.Media;
 
+  console.log(anime);
+
   return (
     <Layout>
       <Seo title={anime.title.romaji} />

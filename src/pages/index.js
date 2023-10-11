@@ -14,7 +14,7 @@ const IndexPage = () => {
             <a href="https://rickandmortyapi.com/">Rick And Morty API</a>
           </p>
           <div className="get-started-button-group">
-            <a href="/anime/page=1" className="explore-button">
+            <a href="/anime/all/page=1" className="explore-button">
               Explore
             </a>
           </div>

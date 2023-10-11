@@ -2,23 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-const Pagination = ({ currentPage, numPages, basePath }) => {
-  const [pageNumbers, setPageNumbers] = useState([1, 2, 3, 4, 5]);
+const Pagination = ({ currentPage, numPages, basePath, filter }) => {
+  const [pageNumbers, setPageNumbers] = useState([]);
+  const pagesToShow = 4;
 
   useEffect(() => {
-    setPageNumbers(Array.from(Array(numPages).keys()).slice(currentPage - 2, currentPage + 3).filter(page => page > 0));
-  }, [currentPage, numPages]);
+    const totalPages = Math.ceil(numPages);
+    const startPage = Math.max(currentPage - Math.floor(pagesToShow / 2), 1);
+    const endPage = Math.min(startPage + pagesToShow - 1, totalPages);
+
+    setPageNumbers(Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i));
+  }, [currentPage, numPages, pagesToShow]);
 
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
 
   const prevPage = isFirst ? null : (
-    <PreviousPage to={`${basePath}/page=${currentPage - 1}`} rel="prev">
+    <PreviousPage to={`${basePath}/${filter}/page=${currentPage - 1}`} rel="prev">
       Previous
     </PreviousPage>
   );
   const nextPage = isLast ? null : (
-    <NextPage to={`${basePath}/page=${currentPage + 1}`}>
+    <NextPage to={`${basePath}/${filter}/page=${currentPage + 1}`}>
       Next
     </NextPage>
   );
@@ -26,11 +31,11 @@ const Pagination = ({ currentPage, numPages, basePath }) => {
   return (
     <nav className="pagination">
       <PaginationContainer>
-        {prevPage}
+        {currentPage !== 1 && prevPage}
         <PaginationList>
           {pageNumbers.map((pageNumber) => (
             <li key={pageNumber} className={currentPage === pageNumber ? 'active' : ''}>
-              <StyledLink to={`${basePath}/page=${pageNumber}`}>{pageNumber}</StyledLink>
+              <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>{pageNumber}</StyledLink>
             </li>
           ))}
         </PaginationList>
@@ -83,7 +88,7 @@ const StyledLink = styled(Link)`
 
   &.active {
     background-color: #000;
-    color: #fff;
+    color: white;
   }
 `;
 
