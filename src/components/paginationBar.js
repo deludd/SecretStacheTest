@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react';
 import {
   PaginationContainer,
   PaginationList,
   StyledLink,
   NextPage,
   PreviousPage,
-} from "../styles/PaginationStyles"
+} from '../styles/PaginationStyles';
 
 const Pagination = ({ currentPage, numPages, basePath, filter }) => {
-  const [pageNumbers, setPageNumbers] = useState([])
-  const pagesToShow = 4
+  const [pageNumbers, setPageNumbers] = useState([]);
+  const pagesToShow = 4;
 
   useEffect(() => {
-    const totalPages = Math.ceil(numPages)
-    const startPage = Math.max(currentPage - Math.floor(pagesToShow / 2), 1)
-    const endPage = Math.min(startPage + pagesToShow - 1, totalPages)
+    const totalPages = Math.ceil(numPages);
+    const startPage = Math.max(currentPage - Math.floor(pagesToShow / 2), 1);
+    const endPage = Math.min(startPage + pagesToShow - 1, totalPages);
 
     setPageNumbers(
-      Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
-    )
-  }, [currentPage, numPages, pagesToShow])
+      Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i),
+    );
+  }, [currentPage, numPages, pagesToShow]);
 
-  const isFirst = currentPage === 1
-  const isLast = currentPage === numPages
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === numPages;
 
   const prevPage = isFirst ? null : (
     <PreviousPage
@@ -31,21 +31,21 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
     >
       Previous
     </PreviousPage>
-  )
+  );
   const nextPage = isLast ? null : (
     <NextPage to={`${basePath}/${filter}/page=${currentPage + 1}`}>
       Next
     </NextPage>
-  )
+  );
 
   return (
     <PaginationContainer>
       {currentPage !== 1 && prevPage}
       <PaginationList>
-        {pageNumbers.map(pageNumber => (
+        {pageNumbers.map((pageNumber) => (
           <li
             key={pageNumber}
-            className={currentPage === pageNumber ? "active" : ""}
+            className={currentPage === pageNumber ? 'active' : ''}
           >
             <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>
               {pageNumber}
@@ -55,7 +55,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
       </PaginationList>
       {nextPage}
     </PaginationContainer>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

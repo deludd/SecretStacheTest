@@ -1,7 +1,7 @@
-import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/layout';
+import Seo from '../components/seo';
 
 import {
   AnimeContainer,
@@ -10,12 +10,12 @@ import {
   AnimeDate,
   AnimeDescription,
   BackButton,
-} from "../styles/SingleAnimePageStyles"
+} from '../styles/SingleAnimePageStyles';
 
 const SingleAnime = ({ data }) => {
-  const anime = data.anilist.Media
+  const anime = data.anilist.Media;
 
-  console.log(anime)
+  console.log(anime);
 
   return (
     <Layout>
@@ -31,10 +31,10 @@ const SingleAnime = ({ data }) => {
         <AnimeDescription>{anime.description}</AnimeDescription>
       </AnimeContainer>
     </Layout>
-  )
-}
+  );
+};
 
-export default SingleAnime
+export default SingleAnime;
 
 export const pageQuery = graphql`
   query ($id: Int!) {
@@ -56,4 +56,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

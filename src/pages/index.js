@@ -1,6 +1,6 @@
-import React from "react"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import React from 'react';
+import Layout from '../components/layout';
+import Seo from '../components/seo';
 
 import {
   Container,
@@ -8,7 +8,7 @@ import {
   Subtitle,
   ButtonGroup,
   ExploreButton,
-} from "../styles/IndexPageStyles"
+} from '../styles/IndexPageStyles';
 
 const IndexPage = () => {
   return (
@@ -23,7 +23,7 @@ const IndexPage = () => {
         </Paper>
       </Container>
     </Layout>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;

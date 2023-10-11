@@ -1,11 +1,11 @@
-import { Link } from "gatsby"
-import styled from "styled-components"
+import { Link } from 'gatsby';
+import styled from 'styled-components';
 
 export const PaginationContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const PreviousPage = styled(Link)`
   display: inline-block;
@@ -21,7 +21,7 @@ export const PreviousPage = styled(Link)`
     background-color: #0056b3;
     color: #fff;
   }
-`
+`;
 
 export const NextPage = styled(Link)`
   display: inline-block;
@@ -37,7 +37,7 @@ export const NextPage = styled(Link)`
     background-color: #0056b3;
     color: #fff;
   }
-`
+`;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
@@ -52,7 +52,7 @@ export const StyledLink = styled(Link)`
     color: #fff;
     background-color: #0056b3;
   }
-`
+`;
 
 export const PaginationList = styled.ul`
   list-style: none;
@@ -77,4 +77,4 @@ export const PaginationList = styled.ul`
       color: #fff;
     }
   }
-`
+`;

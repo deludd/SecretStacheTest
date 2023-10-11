@@ -1,11 +1,11 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 90vh;
-`
+`;
 
 export const Paper = styled.div`
   width: 60%;
@@ -13,18 +13,18 @@ export const Paper = styled.div`
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-`
+`;
 
 export const Subtitle = styled.p`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 30px;
   color: #333;
-`
+`;
 
 export const ButtonGroup = styled.div`
   margin-top: 20px;
-`
+`;
 
 export const ExploreButton = styled.a`
   display: inline-block;
@@ -41,4 +41,4 @@ export const ExploreButton = styled.a`
     background-color: #0056b3;
     color: #fff;
   }
-`
+`;

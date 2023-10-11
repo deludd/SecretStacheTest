@@ -58,12 +58,12 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-graphql",
+      resolve: 'gatsby-source-graphql',
       options: {
-        typeName: "ANILIST",
-        fieldName: "anilist",
-        url: "https://graphql.anilist.co",
+        typeName: 'ANILIST',
+        fieldName: 'anilist',
+        url: 'https://graphql.anilist.co',
       },
     },
   ],
-}
+};

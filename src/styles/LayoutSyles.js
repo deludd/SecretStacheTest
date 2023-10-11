@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { createGlobalStyle } from "styled-components"
+import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export const Container = styled.div`
   max-width: 960px;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   .main-content {
     margin-top: 20px;
   }
-`
+`;
 
 export const GlobalStyles = createGlobalStyle`
   body {
@@ -34,4 +34,4 @@ export const GlobalStyles = createGlobalStyle`
   a:hover {
     color: #0056b3;
   }
-`
+`;

@@ -1,9 +1,9 @@
-import React from "react"
-import { graphql, Link } from "gatsby"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import SingleAnimeCard from "../components/singleAnimeCard"
-import Pagination from "../components/paginationBar"
+import React from 'react';
+import { graphql, Link } from 'gatsby';
+import Layout from '../components/layout';
+import Seo from '../components/seo';
+import SingleAnimeCard from '../components/singleAnimeCard';
+import Pagination from '../components/paginationBar';
 
 import {
   AnimeGrid,
@@ -11,41 +11,41 @@ import {
   AnimeFilters,
   AnimeFilterItem,
   AnimeFilterLink,
-} from "../styles/AnimePageStyles"
+} from '../styles/AnimePageStyles';
 
 const Anime = ({ data, pageContext }) => {
-  const animeData = data.anilist.Page.media
-  const currentPage = pageContext.currentPage
-  const numPages = pageContext.totalPages
-  const currentFilter = pageContext.currentFilter
-  const basePath = "/anime"
+  const animeData = data.anilist.Page.media;
+  const currentPage = pageContext.currentPage;
+  const numPages = pageContext.totalPages;
+  const currentFilter = pageContext.currentFilter;
+  const basePath = '/anime';
 
   const filters = [
     {
-      name: "All",
-      value: "all",
+      name: 'All',
+      value: 'all',
     },
     {
-      name: "Chapters",
-      value: "chapters",
+      name: 'Chapters',
+      value: 'chapters',
     },
     {
-      name: "Popularity",
-      value: "popularity",
+      name: 'Popularity',
+      value: 'popularity',
     },
     {
-      name: "Views",
-      value: "views",
+      name: 'Views',
+      value: 'views',
     },
-  ]
+  ];
 
-  console.log(animeData)
+  console.log(animeData);
 
   return (
     <Layout>
       <Seo title="Anime" />
       <AnimeFilters>
-        {filters.map(filter => (
+        {filters.map((filter) => (
           <AnimeFilterItem key={filter.value}>
             <AnimeFilterLink to={`${basePath}/${filter.value}/page=1`}>
               {filter.name}
@@ -55,7 +55,7 @@ const Anime = ({ data, pageContext }) => {
       </AnimeFilters>
 
       <AnimeGrid>
-        {animeData.slice(0, 6).map(anime => (
+        {animeData.slice(0, 6).map((anime) => (
           <AnimeCardContainer key={anime.id}>
             <Link to={`${basePath}/id=${anime.id}`}>
               <SingleAnimeCard data={anime} />
@@ -70,10 +70,10 @@ const Anime = ({ data, pageContext }) => {
         basePath={basePath}
       />
     </Layout>
-  )
-}
+  );
+};
 
-export default Anime
+export default Anime;
 
 export const pageQuery = graphql`
   query ($skip: Int!, $limit: Int!, $sort: [ANILIST_MediaSort]) {
@@ -97,4 +97,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
