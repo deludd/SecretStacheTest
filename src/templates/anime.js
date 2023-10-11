@@ -94,5 +94,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-
