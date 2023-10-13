@@ -1,9 +1,9 @@
-import React from 'react';
-import { graphql, Link } from 'gatsby';
-import Layout from '../components/layout';
-import Seo from '../components/seo';
-import SingleAnimeCard from '../components/singleAnimeCard';
-import Pagination from '../components/paginationBar';
+import React from "react";
+import { graphql, Link } from "gatsby";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
+import SingleAnimeCard from "../components/singleAnimeCard";
+import Pagination from "../components/paginationBar";
 
 import {
   AnimeGrid,
@@ -11,9 +11,9 @@ import {
   AnimeFilters,
   AnimeFilterItem,
   AnimeFilterLink,
-} from '../styles/AnimePageStyles';
+} from "../styles/AnimePageStyles";
 
-const Anime = ({ data, pageContext, errors }) => {
+const Anime = ({ data, pageContext }) => {
   const animeData = data.anilist.Page.media;
   const currentPage = pageContext.currentPage;
   const numPages = pageContext.totalPages;
@@ -39,10 +39,7 @@ const Anime = ({ data, pageContext, errors }) => {
     },
   ];
 
-  if (errors) {
-    console.error(errors);
-    return null; 
-  }
+  console.log(animeData);
 
   return (
     <Layout>
@@ -63,15 +60,10 @@ const Anime = ({ data, pageContext, errors }) => {
             <Link to={`${basePath}/id=${anime.id}`}>
               <SingleAnimeCard data={anime} />
             </Link>
-          </AnimeCardContainer>
+          </AnimeCardContainer>      
         ))}
       </AnimeGrid>
-      <Pagination
-        currentPage={currentPage}
-        filter={currentFilter}
-        numPages={numPages}
-        basePath={basePath}
-      />
+      <Pagination currentPage={currentPage} filter={currentFilter} numPages={numPages} basePath={basePath} />
     </Layout>
   );
 };
@@ -79,10 +71,10 @@ const Anime = ({ data, pageContext, errors }) => {
 export default Anime;
 
 export const pageQuery = graphql`
-  query ($skip: Int!, $limit: Int!, $sort: [ANILIST_MediaSort], $id_in: [Int]) {
+  query($skip: Int!, $limit: Int!, $sort: [ANILIST_MediaSort]) {
     anilist {
       Page(page: $skip, perPage: $limit) {
-        media(type: ANIME, sort: $sort, id_in: $id_in) {
+        media(type: ANIME, sort: $sort) {
           id
           title {
             romaji
