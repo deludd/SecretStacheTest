@@ -12,7 +12,14 @@ import {
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
 
-const Anime = ({ data: { anilist: { Page: { media: initialAnimeData } } }, pageContext }) => {
+const Anime = ({
+  data: {
+    anilist: {
+      Page: { media: initialAnimeData },
+    },
+  },
+  pageContext,
+}) => {
   const { currentPage, totalPages: numPages, currentFilter } = pageContext;
   const [animeList, setAnimeList] = useState(initialAnimeData);
   const basePath = '/anime';

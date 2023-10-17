@@ -70,7 +70,9 @@ export const PaginationLi = styled.li`
   margin-right: 5px;
   cursor: pointer;
   color: #333;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 
   &.active,
   &:hover {

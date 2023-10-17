@@ -12,11 +12,15 @@ import {
   AnimeDescription,
   BackButton,
   BackButtonOnBanner,
-  AnimeTitleOnBanner
+  AnimeTitleOnBanner,
 } from '../styles/SingleAnimePageStyles';
 
-const SingleAnime = ({ data: { anilist: { Media: anime } }, errors }) => {
-
+const SingleAnime = ({
+  data: {
+    anilist: { Media: anime },
+  },
+  errors,
+}) => {
   const hasBanner = anime.bannerImage ? true : false;
 
   if (errors) {

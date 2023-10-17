@@ -10,7 +10,7 @@ export const AnimeContainer = styled.div`
 
 export const BannerContainer = styled.div`
   position: relative;
-  height: 200px; 
+  height: 200px;
   overflow: hidden;
   margin: -20px -20px 20px -20px;
 `;

@@ -34,7 +34,9 @@ export const ExploreButton = styled.a`
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
-  transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
 
   &:hover {
     transform: translateY(-5px);

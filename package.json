@@ -6,7 +6,7 @@
   "author": "Artem Dymytrov <adimitrov2000@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^2.1.4",
-    "gatsby": "^5.12.6",
+    "gatsby": "^5.12.7",
     "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-image": "^3.12.0",
     "gatsby-plugin-local-search": "^2.0.1",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.22.15",
-    "prettier": "^2.8.8"
+    "prettier": "^3.0.3"
   },
   "keywords": [
     "gatsby"
