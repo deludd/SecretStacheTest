@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { graphql, Link } from "gatsby";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
-import SingleAnimeCard from "../components/singleAnimeCard";
-import Pagination from "../components/paginationBar";
+import React, { useState, useEffect, useCallback } from 'react';
+import { graphql, Link } from 'gatsby';
+import Layout from '../components/layout';
+import Seo from '../components/seo';
+import SingleAnimeCard from '../components/singleAnimeCard';
+import Pagination from '../components/paginationBar';
 
 import {
   AnimeGrid,
@@ -11,7 +11,7 @@ import {
   AnimeFilters,
   AnimeFilterItem,
   AnimeFilterLink,
-} from "../styles/AnimePageStyles";
+} from '../styles/AnimePageStyles';
 
 const Anime = ({ data, pageContext }) => {
   const initialAnimeData = data.anilist.Page.media;
@@ -44,21 +44,24 @@ const Anime = ({ data, pageContext }) => {
   const sortByCriteria = (list, criteria) => {
     let sortedList = [...list];
     switch (criteria) {
-        case 'popularity':
-            return sortedList.sort((a, b) => b.popularity - a.popularity);
-        case 'favourites':
-            return sortedList.sort((a, b) => b.favourites - a.favourites);
-        case 'episodes':
-            return sortedList.sort((a, b) => b.episodes - a.episodes);
-        default:
-            return sortedList;
+      case 'popularity':
+        return sortedList.sort((a, b) => b.popularity - a.popularity);
+      case 'favourites':
+        return sortedList.sort((a, b) => b.favourites - a.favourites);
+      case 'episodes':
+        return sortedList.sort((a, b) => b.episodes - a.episodes);
+      default:
+        return sortedList;
     }
   };
 
-  const handleSortChange = useCallback((criteria) => {
-    const sortedList = sortByCriteria(initialAnimeData, criteria);
-    setAnimeList(sortedList);
-}, [initialAnimeData]);
+  const handleSortChange = useCallback(
+    (criteria) => {
+      const sortedList = sortByCriteria(initialAnimeData, criteria);
+      setAnimeList(sortedList);
+    },
+    [initialAnimeData],
+  );
 
   useEffect(() => {
     handleSortChange(currentFilter);
@@ -83,7 +86,7 @@ const Anime = ({ data, pageContext }) => {
             <Link to={`${basePath}/id=${anime.id}`}>
               <SingleAnimeCard data={anime} />
             </Link>
-          </AnimeCardContainer>      
+          </AnimeCardContainer>
         ))}
       </AnimeGrid>
       <Pagination currentPage={currentPage} filter={currentFilter} numPages={numPages} basePath={basePath} />
@@ -94,7 +97,7 @@ const Anime = ({ data, pageContext }) => {
 export default Anime;
 
 export const pageQuery = graphql`
-  query($page: Int!, $perPage: Int!) {
+  query ($page: Int!, $perPage: Int!) {
     anilist {
       Page(page: $page, perPage: $perPage) {
         media(type: ANIME) {

@@ -28,8 +28,7 @@ const SingleAnime = ({ data, errors }) => {
         <AnimeTitle>{anime.title.romaji}</AnimeTitle>
         <AnimeImage src={anime.coverImage.large} alt={anime.title.romaji} />
         <AnimeDate>
-          Start Date: {anime.startDate.year}-{anime.startDate.month}-
-          {anime.startDate.day}
+          Start Date: {anime.startDate.year}-{anime.startDate.month}-{anime.startDate.day}
         </AnimeDate>
         <AnimeDescription>{anime.description}</AnimeDescription>
       </AnimeContainer>

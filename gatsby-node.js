@@ -4,31 +4,32 @@ exports.createPages = async ({ graphql, actions }) => {
   const animePerPage = 6;
   const filters = ['all', 'popularity', 'favourites', 'episodes'];
   const MAX_RETRIES = 5;
-  const DELAY_INCREMENT = 5000; 
+  const DELAY_INCREMENT = 5000;
   const MAX_ANIME_COUNT = 500;
 
   const fetchWithRetry = async (query, variables, retryCount = 0) => {
     try {
       const result = await graphql(query, variables);
       if (result.errors) {
-        console.error("Error in fetchWithRetry:", result.errors);
-        throw new Error("GraphQL query failed");
+        console.error('Error in fetchWithRetry:', result.errors);
+        throw new Error('GraphQL query failed');
       }
       return result;
     } catch (error) {
       if (error.message.includes('429') && retryCount < MAX_RETRIES) {
         const delay = (retryCount + 1) * DELAY_INCREMENT;
         console.warn(`Rate limit hit. Retrying after ${delay}ms...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        await new Promise((resolve) => setTimeout(resolve, delay));
         return fetchWithRetry(query, variables, retryCount + 1);
       } else {
-        console.error("Error in fetchWithRetry after retries:", error);
+        console.error('Error in fetchWithRetry after retries:', error);
         throw error;
       }
     }
   };
 
-  const totalCountQuery = await fetchWithRetry(`
+  const totalCountQuery = await fetchWithRetry(
+    `
     query AnimePageCount {
       anilist {
         SiteStatistics {
@@ -40,7 +41,9 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `, {});
+  `,
+    {},
+  );
 
   const totalCount = totalCountQuery.data.anilist.SiteStatistics.anime.pageInfo.total;
   const totalPages = Math.ceil(totalCount / animePerPage);
@@ -52,7 +55,7 @@ exports.createPages = async ({ graphql, actions }) => {
       all: null,
       popularity: 'popularity',
       favourites: 'favourites',
-      views: 'episodes'
+      views: 'episodes',
     };
     return sortMapping[filter] ? [sortMapping[filter]] : null;
   };
@@ -61,7 +64,7 @@ exports.createPages = async ({ graphql, actions }) => {
     for (const filter of filters) {
       for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
         const isLastPage = currentPage === totalPages;
-        const remainingAnime = totalCount % animePerPage; 
+        const remainingAnime = totalCount % animePerPage;
         createPage({
           path: `/anime/${filter}/page=${currentPage}`,
           component: animePageTemplate,
@@ -94,17 +97,14 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
-        `)
+        `),
       );
     }
     const results = await Promise.all(requests);
-    const animeIDs = results.flatMap(result =>
-      result.data.anilist.Page.media.map(anime => anime.id)
-    );
-    console.log("Total animeIDs fetched:", animeIDs.length);
+    const animeIDs = results.flatMap((result) => result.data.anilist.Page.media.map((anime) => anime.id));
+    console.log('Total animeIDs fetched:', animeIDs.length);
     return animeIDs;
   };
-  
 
   generateAnimePages();
 
@@ -120,7 +120,6 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     }
   } catch (error) {
-    console.error("Error creating single anime pages:", error);
+    console.error('Error creating single anime pages:', error);
   }
 };
-

@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-  AnimeCardContainer,
-  AnimeTitle,
-} from '../styles/SingleAnimeComponentStyles';
+import { AnimeCardContainer, AnimeTitle } from '../styles/SingleAnimeComponentStyles';
 
 const SingleAnimeCard = ({ data: { title, coverImage } }) => {
   return (

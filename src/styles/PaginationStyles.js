@@ -79,6 +79,6 @@ export const PaginationLi = styled.li`
   }
 
   &:last-child {
-  margin-right: 0;
-}
+    margin-right: 0;
+  }
 `;

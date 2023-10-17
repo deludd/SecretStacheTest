@@ -66,7 +66,6 @@ export const SearchLink = styled(Link)`
   color: #333;
 `;
 
-
 export const SearchResultItem = styled.div`
   padding: 10px;
   cursor: pointer;
@@ -82,7 +81,6 @@ export const SearchResultItem = styled.div`
     color: #333;
 
     &:hover {
-      
     }
   }
 `;
