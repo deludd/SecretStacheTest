@@ -6,9 +6,7 @@ const SingleAnimeCard = ({ data: { title, coverImage } }) => {
   return (
     <AnimeCardContainer>
       <img src={coverImage.large} alt={title.romaji} />
-      <AnimeTitle>
-        <h2>{title.romaji}</h2>
-      </AnimeTitle>
+      <AnimeTitle>{title.romaji}</AnimeTitle>
     </AnimeCardContainer>
   );
 };

@@ -12,15 +12,14 @@ import {
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
 
-const Anime = ({
-  data: {
+const Anime = ({ data, pageContext }) => {
+  const {
     anilist: {
       Page: { media: initialAnimeData },
     },
-  },
-  pageContext,
-}) => {
-  const { currentPage, totalPages: numPages, currentFilter } = pageContext;
+  } = data;
+
+  const { currentPage, totalPages, currentFilter } = pageContext;
   const [animeList, setAnimeList] = useState(initialAnimeData);
   const basePath = '/anime';
 
@@ -45,25 +44,21 @@ const Anime = ({
     }
   }, []);
 
-  const handleSortChange = useCallback(
-    (criteria) => {
-      setAnimeList(sortByCriteria(initialAnimeData, criteria));
-    },
-    [initialAnimeData, sortByCriteria],
-  );
-
   useEffect(() => {
-    handleSortChange(currentFilter);
-  }, [currentFilter, handleSortChange]);
+    setAnimeList(sortByCriteria(initialAnimeData, currentFilter));
+  }, [initialAnimeData, currentFilter, sortByCriteria]);
 
   return (
     <Layout>
       <Seo title="Anime" />
       <AnimeFilters>
-        {filters.map((filter) => (
-          <AnimeFilterItem key={filter.value}>
-            <AnimeFilterLink onClick={() => handleSortChange(filter.value)} to={`${basePath}/${filter.value}/page=1`}>
-              {filter.name}
+        {filters.map(({ name, value }) => (
+          <AnimeFilterItem key={value}>
+            <AnimeFilterLink
+              onClick={() => setAnimeList(sortByCriteria(initialAnimeData, value))}
+              to={`${basePath}/${value}/page=1`}
+            >
+              {name}
             </AnimeFilterLink>
           </AnimeFilterItem>
         ))}
@@ -77,7 +72,7 @@ const Anime = ({
           </AnimeCardContainer>
         ))}
       </AnimeGrid>
-      <Pagination currentPage={currentPage} filter={currentFilter} numPages={numPages} basePath={basePath} />
+      <Pagination currentPage={currentPage} filter={currentFilter} numPages={totalPages} basePath={basePath} />
     </Layout>
   );
 };
@@ -85,21 +80,16 @@ const Anime = ({
 export default Anime;
 
 export const pageQuery = graphql`
-  query ($page: Int!, $perPage: Int!) {
+  query ($page: Int!, $perPage: Int!, $idIn: [Int]) {
     anilist {
       Page(page: $page, perPage: $perPage) {
-        media(type: ANIME) {
+        media(type: ANIME, id_in: $idIn) {
           id
           title {
             romaji
           }
           coverImage {
             large
-          }
-          startDate {
-            year
-            month
-            day
           }
           popularity
           favourites
