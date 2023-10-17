@@ -24,23 +24,20 @@ export const BannerImage = styled.img`
 
 export const AnimeTitle = styled.h2`
   font-size: 2.5rem;
-  color: #fff;
-  margin: 0;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #333;
+  margin: 20px 0;
+  text-shadow: none;
+  position: relative;
 `;
 
 export const BackButton = styled.span`
-  position: absolute;
-  top: 10px;
-  left: 10px;
   font-size: 1rem;
-  color: #fff;
+  color: #007bff;
   cursor: pointer;
+  display: block;
+  margin-bottom: 10px;
   transition: transform 0.3s ease;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 10;
 
   &:hover {
     transform: translateY(-5px);
@@ -49,6 +46,22 @@ export const BackButton = styled.span`
   &:before {
     content: '← ';
   }
+`;
+
+export const BackButtonOnBanner = styled(BackButton)`
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+`;
+
+export const AnimeTitleOnBanner = styled(AnimeTitle)`
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 export const AnimeImage = styled.img`
