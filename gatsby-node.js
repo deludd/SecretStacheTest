@@ -2,7 +2,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
   const animePerPage = 6;
-  const filters = ['all', 'chapters', 'popularity', 'views'];
+  const filters = ['all', 'popularity', 'favourites', 'episodes'];
   const MAX_RETRIES = 5;
   const DELAY_INCREMENT = 5000; 
   const MAX_ANIME_COUNT = 500;
@@ -50,9 +50,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const getSortArrayFromFilter = (filter) => {
     const sortMapping = {
       all: null,
-      chapters: 'CHAPTERS_DESC',
-      popularity: 'POPULARITY_DESC',
-      views: 'SCORE_DESC'
+      popularity: 'popularity',
+      favourites: 'favourites',
+      views: 'episodes'
     };
     return sortMapping[filter] ? [sortMapping[filter]] : null;
   };
