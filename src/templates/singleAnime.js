@@ -5,6 +5,8 @@ import Seo from '../components/seo';
 import {
   AnimeContainer,
   AnimeTitle,
+  BannerContainer,
+  BannerImage,
   AnimeImage,
   AnimeDate,
   AnimeDescription,
@@ -12,6 +14,8 @@ import {
 } from '../styles/SingleAnimePageStyles';
 
 const SingleAnime = ({ data: { anilist: { Media: anime } }, errors }) => {
+
+  const hasBanner = anime.bannerImage ? true : false;
 
   if (errors) {
     console.error(errors);
@@ -29,8 +33,13 @@ const SingleAnime = ({ data: { anilist: { Media: anime } }, errors }) => {
     <Layout>
       <Seo title={anime.title.romaji} />
       <AnimeContainer>
-        <BackButton onClick={() => window.history.back()}>Back</BackButton>
-        <AnimeTitle>{anime.title.romaji}</AnimeTitle>
+        {anime.bannerImage && (
+          <BannerContainer>
+            <BannerImage src={anime.bannerImage} alt={anime.title.romaji} />
+            <AnimeTitle>{anime.title.romaji}</AnimeTitle>
+            <BackButton onClick={() => window.history.back()}>Back</BackButton>
+          </BannerContainer>
+        )}
         <AnimeImage src={anime.coverImage.large} alt={anime.title.romaji} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{anime.description}</AnimeDescription>
