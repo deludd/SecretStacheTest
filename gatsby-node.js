@@ -5,6 +5,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const filters = ['all', 'chapters', 'popularity', 'views'];
   const MAX_RETRIES = 5;
   const DELAY_INCREMENT = 5000; 
+  const MAX_ANIME_COUNT = 500;
 
   const fetchWithRetry = async (query, variables, retryCount = 0) => {
     try {
@@ -58,14 +59,16 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const generateAnimePages = () => {
     for (const filter of filters) {
-      for (let i = 0; i < totalPages; i++) {
+      for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+        const isLastPage = currentPage === totalPages;
+        const remainingAnime = totalCount % animePerPage; 
         createPage({
-          path: `/anime/${filter}/page=${i + 1}`,
+          path: `/anime/${filter}/page=${currentPage}`,
           component: animePageTemplate,
           context: {
-            skip: i * animePerPage,
-            limit: animePerPage,
-            currentPage: i + 1,
+            page: currentPage,
+            perPage: isLastPage ? remainingAnime : animePerPage,
+            currentPage,
             totalPages,
             sort: getSortArrayFromFilter(filter),
             currentFilter: filter,
@@ -78,7 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const getAllAnimeIDs = async () => {
     const bigPerPage = 50;
     const requests = [];
-    const totalPages = Math.ceil(totalCount / bigPerPage);
+    const totalPages = Math.ceil(MAX_ANIME_COUNT / bigPerPage);
     for (let page = 1; page <= totalPages; page++) {
       requests.push(
         fetchWithRetry(`
@@ -98,6 +101,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const animeIDs = results.flatMap(result =>
       result.data.anilist.Page.media.map(anime => anime.id)
     );
+    console.log("Total animeIDs fetched:", animeIDs.length);
     return animeIDs;
   };
   
@@ -107,7 +111,6 @@ exports.createPages = async ({ graphql, actions }) => {
   try {
     const animeIDs = await getAllAnimeIDs();
     for (const id of animeIDs) {
-      console.log(`Creating single anime page for ID: ${id}`);
       createPage({
         path: `/anime/id=${id}`,
         component: singleAnimeTemplate,
@@ -115,7 +118,6 @@ exports.createPages = async ({ graphql, actions }) => {
           id,
         },
       });
-      console.log(`Successfully created single anime page for ID: ${id}`);
     }
   } catch (error) {
     console.error("Error creating single anime pages:", error);

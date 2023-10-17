@@ -15,6 +15,7 @@ import {
 
 const Anime = ({ data, pageContext }) => {
   const animeData = data.anilist.Page.media;
+  console.log('Number of anime on this page:', animeData.length);
   const currentPage = pageContext.currentPage;
   const numPages = pageContext.totalPages;
   const currentFilter = pageContext.currentFilter;
@@ -71,9 +72,9 @@ const Anime = ({ data, pageContext }) => {
 export default Anime;
 
 export const pageQuery = graphql`
-  query($skip: Int!, $limit: Int!, $sort: [ANILIST_MediaSort]) {
+  query($page: Int!, $perPage: Int!, $sort: [ANILIST_MediaSort]) {
     anilist {
-      Page(page: $skip, perPage: $limit) {
+      Page(page: $page, perPage: $perPage) {
         media(type: ANIME, sort: $sort) {
           id
           title {
