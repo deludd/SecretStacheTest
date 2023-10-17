@@ -4,7 +4,6 @@ import Layout from '../components/layout';
 import Seo from '../components/seo';
 import SingleAnimeCard from '../components/singleAnimeCard';
 import Pagination from '../components/paginationBar';
-
 import {
   AnimeGrid,
   AnimeCardContainer,
@@ -13,36 +12,20 @@ import {
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
 
-const Anime = ({ data, pageContext }) => {
-  const initialAnimeData = data.anilist.Page.media;
+const Anime = ({ data: { anilist: { Page: { media: initialAnimeData } } }, pageContext }) => {
+  const { currentPage, totalPages: numPages, currentFilter } = pageContext;
   const [animeList, setAnimeList] = useState(initialAnimeData);
-
-  const currentPage = pageContext.currentPage;
-  const numPages = pageContext.totalPages;
-  const currentFilter = pageContext.currentFilter;
   const basePath = '/anime';
 
   const filters = [
-    {
-      name: 'All',
-      value: 'all',
-    },
-    {
-      name: 'Popularity',
-      value: 'popularity',
-    },
-    {
-      name: 'Favourites',
-      value: 'favourites',
-    },
-    {
-      name: 'Episodes',
-      value: 'episodes',
-    },
+    { name: 'All', value: 'all' },
+    { name: 'Popularity', value: 'popularity' },
+    { name: 'Favourites', value: 'favourites' },
+    { name: 'Episodes', value: 'episodes' },
   ];
 
-  const sortByCriteria = (list, criteria) => {
-    let sortedList = [...list];
+  const sortByCriteria = useCallback((list, criteria) => {
+    const sortedList = [...list];
     switch (criteria) {
       case 'popularity':
         return sortedList.sort((a, b) => b.popularity - a.popularity);
@@ -53,14 +36,13 @@ const Anime = ({ data, pageContext }) => {
       default:
         return sortedList;
     }
-  };
+  }, []);
 
   const handleSortChange = useCallback(
     (criteria) => {
-      const sortedList = sortByCriteria(initialAnimeData, criteria);
-      setAnimeList(sortedList);
+      setAnimeList(sortByCriteria(initialAnimeData, criteria));
     },
-    [initialAnimeData],
+    [initialAnimeData, sortByCriteria],
   );
 
   useEffect(() => {
@@ -79,7 +61,6 @@ const Anime = ({ data, pageContext }) => {
           </AnimeFilterItem>
         ))}
       </AnimeFilters>
-
       <AnimeGrid>
         {animeList.slice(0, 6).map((anime) => (
           <AnimeCardContainer key={anime.id}>

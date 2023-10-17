@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
-
 import {
   AnimeContainer,
   AnimeTitle,
@@ -12,13 +11,19 @@ import {
   BackButton,
 } from '../styles/SingleAnimePageStyles';
 
-const SingleAnime = ({ data, errors }) => {
-  const anime = data.anilist.Media;
+const SingleAnime = ({ data: { anilist: { Media: anime } }, errors }) => {
 
   if (errors) {
     console.error(errors);
-    return null;
+    return (
+      <Layout>
+        <Seo title="Error" />
+        <p>There was an error fetching the anime details. Please try again later.</p>
+      </Layout>
+    );
   }
+
+  const formattedDate = `${anime.startDate.year}-${anime.startDate.month}-${anime.startDate.day}`;
 
   return (
     <Layout>
@@ -27,9 +32,7 @@ const SingleAnime = ({ data, errors }) => {
         <BackButton onClick={() => window.history.back()}>Back</BackButton>
         <AnimeTitle>{anime.title.romaji}</AnimeTitle>
         <AnimeImage src={anime.coverImage.large} alt={anime.title.romaji} />
-        <AnimeDate>
-          Start Date: {anime.startDate.year}-{anime.startDate.month}-{anime.startDate.day}
-        </AnimeDate>
+        <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{anime.description}</AnimeDescription>
       </AnimeContainer>
     </Layout>
@@ -55,6 +58,7 @@ export const pageQuery = graphql`
           day
         }
         description
+        bannerImage
       }
     }
   }
