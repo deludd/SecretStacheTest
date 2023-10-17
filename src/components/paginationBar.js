@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
   PaginationContainer,
-  PaginationList,
+  PaginationUl,
+  PaginationLi,
   StyledLink,
   NextPage,
   PreviousPage,
@@ -41,18 +42,18 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
   return (
     <PaginationContainer>
       {currentPage !== 1 && prevPage}
-      <PaginationList>
+      <PaginationUl>
         {pageNumbers.map((pageNumber) => (
-          <li
+          <PaginationLi
             key={pageNumber}
             className={currentPage === pageNumber ? 'active' : ''}
           >
             <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>
               {pageNumber}
             </StyledLink>
-          </li>
+          </PaginationLi>
         ))}
-      </PaginationList>
+      </PaginationUl>
       {nextPage}
     </PaginationContainer>
   );

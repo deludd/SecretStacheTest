@@ -62,7 +62,7 @@ const Anime = ({ data, pageContext }) => {
 
   useEffect(() => {
     handleSortChange(currentFilter);
-  }, [currentFilter]);
+  }, [currentFilter, handleSortChange]);
 
   return (
     <Layout>

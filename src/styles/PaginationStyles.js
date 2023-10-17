@@ -54,27 +54,31 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-export const PaginationList = styled.ul`
+export const PaginationUl = styled.ul`
   list-style: none;
   padding: 10px;
   margin: 0;
   display: flex;
   align-items: center;
+`;
 
-  li {
-    display: inline-block;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 0;
-    cursor: pointer;
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
+export const PaginationLi = styled.li`
+  display: inline-block;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
 
-    &.active,
-    &:hover {
-      background-color: #0056b3;
-      color: #fff;
-    }
+  &.active,
+  &:hover {
+    background-color: #0056b3;
+    color: #fff;
   }
+
+  &:last-child {
+  margin-right: 0;
+}
 `;
