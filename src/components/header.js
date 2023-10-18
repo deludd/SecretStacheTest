@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 
 import {
@@ -13,15 +13,27 @@ import {
   HeaderContainer,
 } from '../styles/HeaderStyles';
 
-const Header = ({ allAnimeData }) => {
+const Header = () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [animeList, setAnimeList] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedAnimeTitles = localStorage.getItem('animeTitles');
+      if (storedAnimeTitles) {
+        setAnimeList(JSON.parse(storedAnimeTitles));
+      }
+    }
+  }, []);
+
+  console.log('animeTitles:', animeList);
 
   const handleInputChange = (event) => {
     const query = event.target.value;
     setSearchValue(query);
     if (query) {
-      const results = allAnimeData.Page.media.filter((anime) =>
+      const results = animeList.filter((anime) =>
         anime.title.romaji.toLowerCase().includes(query.toLowerCase()),
       );
       setSearchResults(results);

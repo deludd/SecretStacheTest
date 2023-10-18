@@ -1,10 +1,10 @@
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const animePerPage = 6;
+  const ANIME_PER_PAGE = 6;
   const filters = ['all', 'popularity', 'favourites', 'episodes'];
   const MAX_RETRIES = 5;
   const DELAY_INCREMENT = 10000;
-  const MAX_ANIME_COUNT = 12;
+  const MAX_ANIME_COUNT = 500;
 
   const fetchWithRetry = async (query, variables = {}, retryCount = 0) => {
     try {
@@ -28,39 +28,55 @@ exports.createPages = async ({ graphql, actions }) => {
   };
 
   const getAllAnimeIDs = async () => {
-    const result = await fetchWithRetry(`
-      query AllAnimeIDs {
-        anilist {
-          Page(page: 1, perPage: ${MAX_ANIME_COUNT}) {
-            media(type: ANIME) {
-              id
+    const bigPerPage = 50;
+    const requests = [];
+    const totalPagesToIterate = Math.ceil(MAX_ANIME_COUNT / bigPerPage);
+    for (let page = 1; page <= totalPagesToIterate; page++) {
+      requests.push(
+        fetchWithRetry(`
+          query AnimePage {
+            anilist {
+              Page(page: ${page}, perPage: ${bigPerPage}) {
+                media(type: ANIME) {
+                  id
+                  title {
+                    romaji
+                  }
+                }
+              }
             }
           }
-        }
-      }
-    `);
-    return result.data.anilist.Page.media.map((anime) => anime.id);
+        `)
+      );
+    }
+    const results = await Promise.all(requests);
+    return results.flatMap(result => result.data.anilist.Page.media);
   };
 
-  const totalPages = Math.ceil(MAX_ANIME_COUNT / animePerPage);
+  const animeData = await getAllAnimeIDs();
+
+  const animeIDs =  animeData.map(anime => anime.id);
+
+  const totalPagesToCreate = Math.ceil(animeIDs.length / ANIME_PER_PAGE);
   const animePageTemplate = require.resolve('./src/templates/anime.js');
   const singleAnimeTemplate = require.resolve('./src/templates/singleAnime.js');
 
-  const animeIDs = await getAllAnimeIDs();
+  console.log('animeIDs:', animeIDs);
 
   filters.forEach(filter => {
-    Array.from({ length: totalPages }).forEach((_, index) => {
+    Array.from({ length: totalPagesToCreate }).forEach((_, index) => {
       const currentPage = index + 1;
       createPage({
         path: `/anime/${filter}/page=${currentPage}`,
         component: animePageTemplate,
         context: {
           page: currentPage,
-          perPage: animePerPage,
+          perPage: ANIME_PER_PAGE,
           currentPage,
-          totalPages,
+          totalPages: totalPagesToCreate,
           currentFilter: filter,
           idIn: animeIDs,
+          animeTitles: animeData,
         },
       });
     });

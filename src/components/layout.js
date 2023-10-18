@@ -11,23 +11,13 @@ const Layout = ({ children }) => {
           title
         }
       }
-      anilist {
-        Page {
-          media(type: ANIME) {
-            id
-            title {
-              romaji
-            }
-          }
-        }
-      }
     }
   `);
 
   return (
     <>
       <GlobalStyles />
-      <Header siteTitle={data.site.siteMetadata.title} allAnimeData={data.anilist} />
+      <Header siteTitle={data.site.siteMetadata.title} />
       <Container>
         <main>{children}</main>
       </Container>

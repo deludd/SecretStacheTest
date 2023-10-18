@@ -19,9 +19,15 @@ const Anime = ({ data, pageContext }) => {
     },
   } = data;
 
-  const { currentPage, totalPages, currentFilter } = pageContext;
+  const { currentPage, totalPages, currentFilter, animeTitles } = pageContext;
   const [animeList, setAnimeList] = useState(initialAnimeData);
   const basePath = '/anime';
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && animeTitles) {
+      localStorage.setItem('animeTitles', JSON.stringify(animeTitles));
+    }
+  }, [animeTitles]);
 
   const filters = [
     { name: 'All', value: 'all' },
