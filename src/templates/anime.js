@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { graphql, Link } from 'gatsby';
+import { Link } from 'gatsby';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 import SingleAnimeCard from '../components/singleAnimeCard';
@@ -12,15 +12,9 @@ import {
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
 
-const Anime = ({ data, pageContext }) => {
-  const {
-    anilist: {
-      Page: { media: initialAnimeData },
-    },
-  } = data;
-
+const Anime = ({ pageContext }) => {
   const { currentPage, totalPages, currentFilter, animeTitles } = pageContext;
-  const [animeList, setAnimeList] = useState(initialAnimeData);
+  const [animeList, setAnimeList] = useState(animeTitles);
   const basePath = '/anime';
 
   useEffect(() => {
@@ -51,8 +45,8 @@ const Anime = ({ data, pageContext }) => {
   }, []);
 
   useEffect(() => {
-    setAnimeList(sortByCriteria(initialAnimeData, currentFilter));
-  }, [initialAnimeData, currentFilter, sortByCriteria]);
+    setAnimeList(sortByCriteria(animeTitles, currentFilter));
+  }, [animeTitles, currentFilter, sortByCriteria, currentPage]);
 
   return (
     <Layout>
@@ -61,8 +55,8 @@ const Anime = ({ data, pageContext }) => {
         {filters.map(({ name, value }) => (
           <AnimeFilterItem key={value}>
             <AnimeFilterLink
-              onClick={() => setAnimeList(sortByCriteria(initialAnimeData, value))}
-              to={`${basePath}/${value}/page=1`}
+              onClick={() => setAnimeList(sortByCriteria(animeTitles, value))}
+              to={`${basePath}/${value}/page=${currentPage}`}
             >
               {name}
             </AnimeFilterLink>
@@ -84,29 +78,3 @@ const Anime = ({ data, pageContext }) => {
 };
 
 export default Anime;
-
-export const pageQuery = graphql`
-  query ($page: Int!, $perPage: Int!, $idIn: [Int]) {
-    anilist {
-      Page(page: $page, perPage: $perPage) {
-        media(type: ANIME, id_in: $idIn) {
-          id
-          title {
-            romaji
-          }
-          coverImage {
-            large
-            largeSharp {
-              childImageSharp {
-                gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
-              }
-            }
-          }
-          popularity
-          favourites
-          episodes
-        }
-      }
-    }
-  }
-`;

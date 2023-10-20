@@ -27,8 +27,6 @@ const Header = () => {
     }
   }, []);
 
-  console.log('animeTitles:', animeList);
-
   const handleInputChange = (event) => {
     const query = event.target.value;
     setSearchValue(query);

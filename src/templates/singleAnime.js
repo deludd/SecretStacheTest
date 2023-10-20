@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { getImage } from 'gatsby-plugin-image';
+import parse from 'html-react-parser';
 import Seo from '../components/seo';
 import {
   AnimeContainer,
@@ -22,10 +23,11 @@ const SingleAnime = ({
   },
   errors,
 }) => {
-  const hasBanner = anime.bannerImage ? true : false;
 
-const imageBanner = getImage(anime.bannerImageSharp.childImageSharp.gatsbyImageData);
+const imageBanner = getImage(anime.bannerImageSharp?.childImageSharp.gatsbyImageData);
 const imageAvatar = getImage(anime.coverImage.largeSharp.childImageSharp.gatsbyImageData);
+
+const hasBanner = anime.bannerImageSharp ? true : false;
 
   if (errors) {
     console.error(errors);
@@ -57,7 +59,7 @@ const imageAvatar = getImage(anime.coverImage.largeSharp.childImageSharp.gatsbyI
         )}
         <AnimeImage image={imageAvatar} alt={anime.title.romaji} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
-        <AnimeDescription>{anime.description}</AnimeDescription>
+        <AnimeDescription>{parse(`${anime.description}`)}</AnimeDescription>
       </AnimeContainer>
     </Layout>
   );

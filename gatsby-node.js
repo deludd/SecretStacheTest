@@ -4,7 +4,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const filters = ['all', 'popularity', 'favourites', 'episodes'];
   const MAX_RETRIES = 5;
   const DELAY_INCREMENT = 10000;
-  const MAX_ANIME_COUNT = 500;
+  const MAX_ANIME_COUNT = 12;
 
   const fetchWithRetry = async (query, variables = {}, retryCount = 0) => {
     try {
@@ -28,7 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
   };
 
   const getAllAnimeIDs = async () => {
-    const bigPerPage = 50;
+    const bigPerPage = Math.min(Math.max(6, MAX_ANIME_COUNT / 10), 50);
     const requests = [];
     const totalPagesToIterate = Math.ceil(MAX_ANIME_COUNT / bigPerPage);
     for (let page = 1; page <= totalPagesToIterate; page++) {
@@ -42,6 +42,17 @@ exports.createPages = async ({ graphql, actions }) => {
                   title {
                     romaji
                   }
+                  coverImage {
+                    large
+                    largeSharp {
+                      childImageSharp {
+                        gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
+                      }
+                    }
+                  }
+                  popularity
+                  episodes
+                  favourites
                 }
               }
             }
@@ -61,26 +72,35 @@ exports.createPages = async ({ graphql, actions }) => {
   const animePageTemplate = require.resolve('./src/templates/anime.js');
   const singleAnimeTemplate = require.resolve('./src/templates/singleAnime.js');
 
-  console.log('animeIDs:', animeIDs);
-
   filters.forEach(filter => {
     Array.from({ length: totalPagesToCreate }).forEach((_, index) => {
-      const currentPage = index + 1;
-      createPage({
-        path: `/anime/${filter}/page=${currentPage}`,
-        component: animePageTemplate,
-        context: {
-          page: currentPage,
-          perPage: ANIME_PER_PAGE,
-          currentPage,
-          totalPages: totalPagesToCreate,
-          currentFilter: filter,
-          idIn: animeIDs,
-          animeTitles: animeData,
-        },
-      });
+        const currentPage = index + 1;
+        const start = (currentPage - 1) * ANIME_PER_PAGE;
+        const end = start + ANIME_PER_PAGE;
+        let slicedData = [...animeData];
+
+        if(filter !== 'all') {
+            slicedData.sort((a, b) => b[filter] - a[filter]);
+        }
+        slicedData = slicedData.slice(start, end);
+
+        createPage({
+            path: `/anime/${filter}/page=${currentPage}`,
+            component: animePageTemplate,
+            context: {
+                page: currentPage,
+                perPage: ANIME_PER_PAGE,
+                currentPage,
+                totalPages: totalPagesToCreate,
+                currentFilter: filter,
+                idIn: slicedData,
+                animeTitles: slicedData,
+            },
+        });
     });
-  });
+});
+
+
 
   animeIDs.forEach(id => {
     createPage({
