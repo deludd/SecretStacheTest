@@ -16,10 +16,32 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        base64Width: 20,
+        defaultQuality: 50,
+        stripMetadata: true,
+        useMozJpeg: false,
+        quality: 50,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-graphql-image',
+      options: {
+        schemaName: "ANILIST",
+        imageFieldName: "bannerImage"
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-graphql-image',
+      options: {
+        schemaName: "ANILIST",
+        imageFieldName: "large"
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

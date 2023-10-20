@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
+import { getImage } from 'gatsby-plugin-image';
 import Seo from '../components/seo';
 import {
   AnimeContainer,
@@ -23,6 +24,9 @@ const SingleAnime = ({
 }) => {
   const hasBanner = anime.bannerImage ? true : false;
 
+const imageBanner = getImage(anime.bannerImageSharp.childImageSharp.gatsbyImageData);
+const imageAvatar = getImage(anime.coverImage.largeSharp.childImageSharp.gatsbyImageData);
+
   if (errors) {
     console.error(errors);
     return (
@@ -41,7 +45,7 @@ const SingleAnime = ({
       <AnimeContainer>
         {hasBanner ? (
           <BannerContainer>
-            <BannerImage src={anime.bannerImage} alt={anime.title.romaji} />
+            <BannerImage image={imageBanner} alt={anime.title.romaji} />
             <AnimeTitleOnBanner>{anime.title.romaji}</AnimeTitleOnBanner>
             <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
           </BannerContainer>
@@ -51,7 +55,7 @@ const SingleAnime = ({
             <AnimeTitle>{anime.title.romaji}</AnimeTitle>
           </>
         )}
-        <AnimeImage src={anime.coverImage.large} alt={anime.title.romaji} />
+        <AnimeImage image={imageAvatar} alt={anime.title.romaji} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{anime.description}</AnimeDescription>
       </AnimeContainer>
@@ -69,16 +73,26 @@ export const pageQuery = graphql`
         title {
           romaji
         }
-        coverImage {
-          large
-        }
         startDate {
           year
           month
           day
         }
-        description
         bannerImage
+        bannerImageSharp {
+          childImageSharp {
+            gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED)
+          }
+        }
+        coverImage {
+          large
+          largeSharp {
+            childImageSharp {
+              gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
+            }
+          }
+        }
+        description
       }
     }
   }
