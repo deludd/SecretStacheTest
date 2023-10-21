@@ -1,0 +1,6 @@
+module.exports = {
+  ANIME_PER_PAGE: 6,
+  MAX_RETRIES: 5,
+  DELAY_INCREMENT: 10000,
+  MAX_ANIME_COUNT: 300,
+};

@@ -13,15 +13,10 @@ import {
 } from '../styles/AnimePageStyles';
 
 const Anime = ({ pageContext }) => {
-  const { currentPage, totalPages, currentFilter, animeTitles } = pageContext;
-  const [animeList, setAnimeList] = useState(animeTitles);
+  const { currentPage, totalPages, currentFilter, animeTitles: animeTitlesFromContext } = pageContext;
+  const [animeList, setAnimeList] = useState([]);
   const basePath = '/anime';
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && animeTitles) {
-      localStorage.setItem('animeTitles', JSON.stringify(animeTitles));
-    }
-  }, [animeTitles]);
+  console.log(animeTitlesFromContext.length);
 
   const filters = [
     { name: 'All', value: 'all' },
@@ -45,8 +40,19 @@ const Anime = ({ pageContext }) => {
   }, []);
 
   useEffect(() => {
-    setAnimeList(sortByCriteria(animeTitles, currentFilter));
-  }, [animeTitles, currentFilter, sortByCriteria, currentPage]);
+    const storedAnimeTitles = typeof window !== 'undefined' ? localStorage.getItem('animeTitles') : null;
+    const fullList = storedAnimeTitles ? JSON.parse(storedAnimeTitles) : animeTitlesFromContext;
+    if (!storedAnimeTitles) {
+      localStorage.setItem('animeTitles', JSON.stringify(animeTitlesFromContext));
+    }
+    const sortedList = sortByCriteria(fullList, currentFilter);
+    const start = (currentPage - 1) * 6;
+    const end = start + 6;
+    setAnimeList(sortedList.slice(start, end));
+  
+  }, [animeTitlesFromContext, currentFilter, currentPage, sortByCriteria]);
+  
+  
 
   return (
     <Layout>
@@ -55,7 +61,12 @@ const Anime = ({ pageContext }) => {
         {filters.map(({ name, value }) => (
           <AnimeFilterItem key={value}>
             <AnimeFilterLink
-              onClick={() => setAnimeList(sortByCriteria(animeTitles, value))}
+              onClick={() => {
+                const storedAnimeTitles = localStorage.getItem('animeTitles');
+                const fullList = JSON.parse(storedAnimeTitles);
+                console.log(fullList);
+                setAnimeList(sortByCriteria(fullList, value));
+              }}
               to={`${basePath}/${value}/page=${currentPage}`}
             >
               {name}
@@ -64,7 +75,7 @@ const Anime = ({ pageContext }) => {
         ))}
       </AnimeFilters>
       <AnimeGrid>
-        {animeList.slice(0, 6).map((anime) => (
+        {animeList.map((anime) => (
           <AnimeCardContainer key={anime.id}>
             <Link to={`${basePath}/id=${anime.id}`}>
               <SingleAnimeCard data={anime} />
