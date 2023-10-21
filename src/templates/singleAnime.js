@@ -31,7 +31,10 @@ const SingleAnime = ({
     coverImage,
   } = anime;
   const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
-  const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
+  const imageAvatar = coverImage?.largeSharp?.childImageSharp?.gatsbyImageData
+  ? getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData)
+  : null;
+
 
   if (errors) {
     return (
