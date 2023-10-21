@@ -16,7 +16,6 @@ const Anime = ({ pageContext }) => {
   const { currentPage, totalPages, currentFilter, animeTitles: animeTitlesFromContext } = pageContext;
   const [animeList, setAnimeList] = useState([]);
   const basePath = '/anime';
-  console.log(animeTitlesFromContext.length);
 
   const filters = [
     { name: 'All', value: 'all' },
@@ -38,21 +37,29 @@ const Anime = ({ pageContext }) => {
         return sortedList;
     }
   }, []);
+  
+  const updateAnimeList = useCallback(
+    (fullList, filter, page) => {
+      const sortedList = sortByCriteria(fullList, filter);
+      const start = (page - 1) * 6;
+      const end = start + 6;
+      return sortedList.slice(start, end);
+    },
+    [sortByCriteria],
+  );
 
   useEffect(() => {
     const storedAnimeTitles = typeof window !== 'undefined' ? localStorage.getItem('animeTitles') : null;
-    const fullList = storedAnimeTitles ? JSON.parse(storedAnimeTitles) : animeTitlesFromContext;
-    if (!storedAnimeTitles) {
+
+    if (!storedAnimeTitles || JSON.stringify(animeTitlesFromContext) !== storedAnimeTitles) {
       localStorage.setItem('animeTitles', JSON.stringify(animeTitlesFromContext));
     }
-    const sortedList = sortByCriteria(fullList, currentFilter);
-    const start = (currentPage - 1) * 6;
-    const end = start + 6;
-    setAnimeList(sortedList.slice(start, end));
   
-  }, [animeTitlesFromContext, currentFilter, currentPage, sortByCriteria]);
+    const fullList = storedAnimeTitles ? JSON.parse(storedAnimeTitles) : animeTitlesFromContext;
+    setAnimeList(updateAnimeList(fullList, currentFilter, currentPage));
+  }, [animeTitlesFromContext, currentFilter, currentPage, updateAnimeList]);
   
-  
+
 
   return (
     <Layout>
@@ -64,8 +71,7 @@ const Anime = ({ pageContext }) => {
               onClick={() => {
                 const storedAnimeTitles = localStorage.getItem('animeTitles');
                 const fullList = JSON.parse(storedAnimeTitles);
-                console.log(fullList);
-                setAnimeList(sortByCriteria(fullList, value));
+                setAnimeList(updateAnimeList(fullList, value, currentPage));
               }}
               to={`${basePath}/${value}/page=${currentPage}`}
             >

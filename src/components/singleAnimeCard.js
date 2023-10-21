@@ -4,7 +4,6 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { AnimeCardContainer, AnimeTitle } from '../styles/SingleAnimeComponentStyles';
 
 const SingleAnimeCard = ({ data: { title, coverImage } }) => {
-
   const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
 
   return (

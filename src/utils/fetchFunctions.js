@@ -29,7 +29,12 @@ const getAllAnimeIDs = async (graphql, maxAnimeCount, maxRetries, delayIncrement
   const totalPagesToIterate = Math.ceil(maxAnimeCount / bigPerPage);
   for (let page = 1; page <= totalPagesToIterate; page++) {
     requests.push(
-      fetchWithRetry(graphql, maxRetries, delayIncrement, 0, `
+      fetchWithRetry(
+        graphql,
+        maxRetries,
+        delayIncrement,
+        0,
+        `
         query AnimePage($page: Int!, $perPage: Int!) {
           anilist {
             Page(page: $page, perPage: $perPage) {
@@ -53,14 +58,16 @@ const getAllAnimeIDs = async (graphql, maxAnimeCount, maxRetries, delayIncrement
             }
           }
         }
-      `, {
-        page: page,
-        perPage: bigPerPage
-      })
+      `,
+        {
+          page: page,
+          perPage: bigPerPage,
+        },
+      ),
     );
   }
   const results = await Promise.all(requests);
-  return results.flatMap(result => result.data.anilist.Page.media);
+  return results.flatMap((result) => result.data.anilist.Page.media);
 };
 
 module.exports = { fetchWithRetry, getAllAnimeIDs };

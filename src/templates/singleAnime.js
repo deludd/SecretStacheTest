@@ -23,14 +23,17 @@ const SingleAnime = ({
   },
   errors,
 }) => {
-
-const imageBanner = getImage(anime.bannerImageSharp?.childImageSharp.gatsbyImageData);
-const imageAvatar = getImage(anime.coverImage.largeSharp.childImageSharp.gatsbyImageData);
-
-const hasBanner = anime.bannerImageSharp ? true : false;
+  const {
+    title: { romaji },
+    startDate,
+    bannerImageSharp,
+    description,
+    coverImage,
+  } = anime;
+  const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
+  const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
 
   if (errors) {
-    console.error(errors);
     return (
       <Layout>
         <Seo title="Error" />
@@ -39,27 +42,29 @@ const hasBanner = anime.bannerImageSharp ? true : false;
     );
   }
 
-  const formattedDate = `${anime.startDate.year}-${anime.startDate.month}-${anime.startDate.day}`;
+  const formattedDate = `${startDate.year}-${startDate.month}-${startDate.day}`;
 
   return (
     <Layout>
-      <Seo title={anime.title.romaji} />
+      <Seo title={romaji} />
       <AnimeContainer>
-        {hasBanner ? (
-          <BannerContainer>
-            <BannerImage image={imageBanner} alt={anime.title.romaji} />
-            <AnimeTitleOnBanner>{anime.title.romaji}</AnimeTitleOnBanner>
-            <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
-          </BannerContainer>
+        {bannerImageSharp ? (
+          <>
+            <BannerContainer>
+              <BannerImage image={imageBanner} alt={romaji} />
+              <AnimeTitleOnBanner>{romaji}</AnimeTitleOnBanner>
+              <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
+            </BannerContainer>
+          </>
         ) : (
           <>
             <BackButton onClick={() => window.history.back()}>Back</BackButton>
-            <AnimeTitle>{anime.title.romaji}</AnimeTitle>
+            <AnimeTitle>{romaji}</AnimeTitle>
           </>
         )}
-        <AnimeImage image={imageAvatar} alt={anime.title.romaji} />
+        <AnimeImage image={imageAvatar} alt={romaji} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
-        <AnimeDescription>{parse(`${anime.description}`)}</AnimeDescription>
+        <AnimeDescription>{parse(description)}</AnimeDescription>
       </AnimeContainer>
     </Layout>
   );

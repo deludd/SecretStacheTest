@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
-
 import {
   HeaderWrapper,
   NavItem,
@@ -30,44 +29,44 @@ const Header = () => {
   const handleInputChange = (event) => {
     const query = event.target.value;
     setSearchValue(query);
-    if (query) {
-      const results = animeList.filter((anime) =>
-        anime.title.romaji.toLowerCase().includes(query.toLowerCase()),
-      );
-      setSearchResults(results);
-    } else {
+
+    if (!query) {
       setSearchResults([]);
+      return;
     }
+
+    const results = animeList.filter(anime =>
+      anime.title.romaji.toLowerCase().includes(query.toLowerCase())
+    );
+    setSearchResults(results);
   };
 
   return (
-    <>
-      <HeaderWrapper>
-        <HeaderContainer>
-          <NavList>
-            <NavItem>
-              <Logo className="title">
-                <Link to="/" className="navLink">
-                  AnimeStache
-                </Link>
-              </Logo>
-            </NavItem>
-            <NavItem>
-              <SearchInput type="text" value={searchValue} onChange={handleInputChange} placeholder="Search anime..." />
-              {searchResults.length > 0 && (
-                <SearchResults>
-                  {searchResults.slice(0, 5).map((result) => (
-                    <SearchLink to={`/anime/id=${result.id}`} key={result.id}>
-                      <SearchResultItem>{result.title.romaji}</SearchResultItem>
-                    </SearchLink>
-                  ))}
-                </SearchResults>
-              )}
-            </NavItem>
-          </NavList>
-        </HeaderContainer>
-      </HeaderWrapper>
-    </>
+    <HeaderWrapper>
+      <HeaderContainer>
+        <NavList>
+          <NavItem>
+            <Logo className="title">
+              <Link to="/" className="navLink">
+                AnimeStache
+              </Link>
+            </Logo>
+          </NavItem>
+          <NavItem>
+            <SearchInput type="text" value={searchValue} onChange={handleInputChange} placeholder="Search anime..." />
+            {searchResults.length > 0 && (
+              <SearchResults>
+                {searchResults.slice(0, 5).map(({ title, id }) => (
+                  <SearchLink to={`/anime/id=${id}`} key={id}>
+                    <SearchResultItem>{title.romaji}</SearchResultItem>
+                  </SearchLink>
+                ))}
+              </SearchResults>
+            )}
+          </NavItem>
+        </NavList>
+      </HeaderContainer>
+    </HeaderWrapper>
   );
 };
 

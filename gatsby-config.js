@@ -31,16 +31,16 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-graphql-image',
       options: {
-        schemaName: "ANILIST",
-        imageFieldName: "bannerImage"
-      }
+        schemaName: 'ANILIST',
+        imageFieldName: 'bannerImage',
+      },
     },
     {
       resolve: 'gatsby-plugin-graphql-image',
       options: {
-        schemaName: "ANILIST",
-        imageFieldName: "large"
-      }
+        schemaName: 'ANILIST',
+        imageFieldName: 'large',
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
