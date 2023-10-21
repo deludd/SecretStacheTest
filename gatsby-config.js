@@ -15,7 +15,6 @@ module.exports = {
     siteUrl: `https://your-site-url.com/`,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     {
@@ -25,7 +24,6 @@ module.exports = {
         defaultQuality: 50,
         stripMetadata: true,
         useMozJpeg: false,
-        quality: 50,
       },
     },
     {

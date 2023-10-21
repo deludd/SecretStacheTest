@@ -31,9 +31,9 @@ const SingleAnime = ({
     coverImage,
   } = anime;
   const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
-  const imageAvatar = coverImage?.largeSharp?.childImageSharp?.gatsbyImageData
-  ? getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData)
-  : null;
+  const imageAvatar = getImage(coverImage?.largeSharp?.childImageSharp?.gatsbyImageData);
+
+  console.log(imageAvatar)
 
 
   if (errors) {
@@ -65,7 +65,7 @@ const SingleAnime = ({
             <AnimeTitle>{romaji}</AnimeTitle>
           </>
         )}
-        <AnimeImage image={imageAvatar} alt={romaji} />
+        {imageAvatar && <AnimeImage image={imageAvatar} alt={romaji} />}
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{parse(description)}</AnimeDescription>
       </AnimeContainer>
