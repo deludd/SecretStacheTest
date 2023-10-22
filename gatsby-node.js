@@ -38,15 +38,14 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   animeIDs.forEach((id) => {
-    const anime = animeData.find(anime => anime.id === id);
+    const anime = animeData.find((anime) => anime.id === id);
     createPage({
       path: `/anime/id=${id}`,
       component: singleAnimeTemplate,
       context: {
         id,
-        coverImage: anime.coverImage
+        coverImage: anime.coverImage,
       },
     });
   });
-  
 };

@@ -17,9 +17,7 @@ import {
 } from '../styles/SingleAnimePageStyles';
 
 const SingleAnime = ({
-  pageContext: {
-    coverImage
-  },
+  pageContext: { coverImage },
   data: {
     anilist: { Media: anime },
   },

@@ -35,9 +35,7 @@ const Header = () => {
       return;
     }
 
-    const results = animeList.filter(anime =>
-      anime.title.romaji.toLowerCase().includes(query.toLowerCase())
-    );
+    const results = animeList.filter((anime) => anime.title.romaji.toLowerCase().includes(query.toLowerCase()));
     setSearchResults(results);
   };
 
