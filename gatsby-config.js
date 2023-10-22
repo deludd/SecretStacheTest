@@ -17,6 +17,8 @@ module.exports = {
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-preload-fonts`,
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
