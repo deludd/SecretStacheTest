@@ -66,13 +66,6 @@ export const AnimeTitleOnBanner = styled(AnimeTitle)`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
-export const AnimeImage = styled(GatsbyImage)`
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-top: 20px;
-`;
-
 export const AnimeDescription = styled.p`
   margin-top: 20px;
   font-size: 1.1rem;

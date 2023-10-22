@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
-import { getImage } from 'gatsby-plugin-image';
+import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
 import Seo from '../components/seo';
 import {
@@ -9,7 +9,6 @@ import {
   AnimeTitle,
   BannerContainer,
   BannerImage,
-  AnimeImage,
   AnimeDate,
   AnimeDescription,
   BackButton,
@@ -18,6 +17,9 @@ import {
 } from '../styles/SingleAnimePageStyles';
 
 const SingleAnime = ({
+  pageContext: {
+    coverImage
+  },
   data: {
     anilist: { Media: anime },
   },
@@ -28,13 +30,9 @@ const SingleAnime = ({
     startDate,
     bannerImageSharp,
     description,
-    coverImage,
   } = anime;
   const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
-  const imageAvatar = getImage(coverImage?.largeSharp?.childImageSharp?.gatsbyImageData);
-
-  console.log(imageAvatar)
-
+  const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
 
   if (errors) {
     return (
@@ -65,7 +63,7 @@ const SingleAnime = ({
             <AnimeTitle>{romaji}</AnimeTitle>
           </>
         )}
-        {imageAvatar && <AnimeImage image={imageAvatar} alt={romaji} />}
+        <GatsbyImage image={imageAvatar} alt={romaji} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{parse(description)}</AnimeDescription>
       </AnimeContainer>
@@ -92,14 +90,6 @@ export const pageQuery = graphql`
         bannerImageSharp {
           childImageSharp {
             gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED)
-          }
-        }
-        coverImage {
-          large
-          largeSharp {
-            childImageSharp {
-              gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
-            }
           }
         }
         description
