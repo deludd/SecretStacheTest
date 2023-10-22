@@ -26,12 +26,12 @@ export const NavList = styled.nav`
 `;
 
 export const NavItem = styled.div`
-  margin-right: 20px;
+  margin-right: 40px;
   position: relative;
 `;
 
 export const Logo = styled.h6`
-  margin-left: 20px;
+  margin-left: 40px;
   font-size: 20px;
 `;
 

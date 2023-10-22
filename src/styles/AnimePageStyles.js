@@ -28,7 +28,7 @@ export const AnimeFilters = styled.ul`
   justify-content: center;
   align-items: center;
   list-style-type: none;
-  margin-top: 20px;
+  margin: 20px 0;
   padding-left: 0;
 `;
 
