@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 
-import { Container, Paper, Subtitle, ButtonGroup, ExploreButton } from '../styles/IndexPageStyles';
+import { Container, Paper, Subtitle, ExploreButton } from '../styles/IndexPageStyles';
 
 const IndexPage = () => {
   return (
@@ -11,9 +11,7 @@ const IndexPage = () => {
       <Container>
         <Paper>
           <Subtitle>Welcome to a AnimeStache Project</Subtitle>
-          <ButtonGroup>
-            <ExploreButton to="/anime/all/page=1">Explore</ExploreButton>
-          </ButtonGroup>
+          <ExploreButton to="/anime/all/page=1/">Explore</ExploreButton>
         </Paper>
       </Container>
     </Layout>
