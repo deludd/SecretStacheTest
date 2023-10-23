@@ -26,7 +26,6 @@ export const NavList = styled.nav`
 `;
 
 export const NavItem = styled.div`
-
   position: relative;
 `;
 
@@ -57,6 +56,7 @@ export const SearchInput = styled.input`
 
   @media (max-width: 768px) {
     margin-left: 20px;
+    max-width: 110px;
   }
 `;
 
