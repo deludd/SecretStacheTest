@@ -28,6 +28,11 @@ export const NavList = styled.nav`
 export const NavItem = styled.div`
   margin-right: 40px;
   position: relative;
+
+  @media (max-width: 768px) {
+    margin: 0 20px;
+
+  }
 `;
 
 export const Logo = styled.h6`
@@ -37,6 +42,10 @@ export const Logo = styled.h6`
 
   &:hover {
     color: #007bff;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0px;
   }
 `;
 
@@ -66,7 +75,12 @@ export const SearchResults = styled.div`
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
+
 
 export const SearchLink = styled(Link)`
   color: #333;
