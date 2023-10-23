@@ -26,17 +26,11 @@ export const NavList = styled.nav`
 `;
 
 export const NavItem = styled.div`
-  margin-right: 40px;
+
   position: relative;
-
-  @media (max-width: 768px) {
-    margin: 0 20px;
-
-  }
 `;
 
 export const Logo = styled.h6`
-  margin-left: 40px;
   font-size: 20px;
   color: #0056b3;
 
@@ -50,7 +44,6 @@ export const Logo = styled.h6`
 `;
 
 export const SearchInput = styled.input`
-  width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -60,6 +53,10 @@ export const SearchInput = styled.input`
   &:focus {
     border-color: #aaa;
     outline: none;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 20px;
   }
 `;
 
@@ -84,6 +81,10 @@ export const SearchResults = styled.div`
 
 export const SearchLink = styled(Link)`
   color: #333;
+
+  @media (max-width: 768px) {
+    margin-right: 20px;
+  }
 `;
 
 export const SearchResultItem = styled.div`
