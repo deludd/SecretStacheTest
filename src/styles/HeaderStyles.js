@@ -41,6 +41,7 @@ export const Logo = styled.h6`
 `;
 
 export const SearchInput = styled.input`
+  width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
