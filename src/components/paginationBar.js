@@ -41,9 +41,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
       <PaginationUl>
         {pageNumbers.map((pageNumber) => (
           <PaginationLi key={pageNumber} className={currentPage === pageNumber ? 'active' : ''}>
-            <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>
-              {pageNumber}
-            </StyledLink>
+            <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>{pageNumber}</StyledLink>
           </PaginationLi>
         ))}
       </PaginationUl>
