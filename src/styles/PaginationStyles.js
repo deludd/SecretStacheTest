@@ -40,8 +40,12 @@ export const NextPage = styled(Link)`
 `;
 
 export const StyledLink = styled(Link)`
+  display: block;
   text-decoration: none;
   color: inherit;
+  padding: 0 10px;
+  height: 100%;
+  line-height: inherit;
 
   &&.active {
     color: #fff;
@@ -64,7 +68,6 @@ export const PaginationUl = styled.ul`
 
 export const PaginationLi = styled.li`
   display: inline-block;
-  padding: 0 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 5px;

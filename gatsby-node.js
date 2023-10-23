@@ -1,4 +1,4 @@
-const { ANIME_PER_PAGE, MAX_RETRIES, MAX_ANIME_COUNT, DELAY_INCREMENT } = require('./src/utils/constants');
+const { ANIME_PER_PAGE, MAX_RETRIES, MAX_ANIME_COUNT, DELAY_INCREMENT } = require('./src/utils/constants.common');
 const { getAllAnimeIDs } = require('./src/utils/fetchFunctions');
 
 exports.createPages = async ({ graphql, actions }) => {

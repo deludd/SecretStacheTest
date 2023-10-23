@@ -7,40 +7,47 @@ import {
   NextPage,
   PreviousPage,
 } from '../styles/PaginationStyles';
+import { PAGES_TO_SHOW } from '../utils/constants.es6';
 
 const Pagination = ({ currentPage, numPages, basePath, filter }) => {
   const [pageNumbers, setPageNumbers] = useState([]);
-  const pagesToShow = 4;
 
   useEffect(() => {
     const totalPages = Math.ceil(numPages);
-    const startPage = Math.max(currentPage - Math.floor(pagesToShow / 2), 1);
-    const endPage = Math.min(startPage + pagesToShow - 1, totalPages);
+    const startPage = Math.max(currentPage - Math.floor(PAGES_TO_SHOW / 2), 1);
+    const endPage = Math.min(startPage + PAGES_TO_SHOW - 1, totalPages);
 
-    setPageNumbers(Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i));
-  }, [currentPage, numPages, pagesToShow]);
+    const numbers = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+    setPageNumbers(numbers);
+  }, [currentPage, numPages]);
 
-  const isFirst = currentPage === 1;
-  const isLast = currentPage === numPages;
+  const generatePrevPage = () => {
+    if (currentPage === 1) return null;
+    return (
+      <PreviousPage to={`${basePath}/${filter}/page=${currentPage - 1}`} rel="prev">
+        Previous
+      </PreviousPage>
+    );
+  };
 
-  const prevPage = isFirst ? null : (
-    <PreviousPage to={`${basePath}/${filter}/page=${currentPage - 1}`} rel="prev">
-      Previous
-    </PreviousPage>
-  );
-  const nextPage = isLast ? null : <NextPage to={`${basePath}/${filter}/page=${currentPage + 1}`}>Next</NextPage>;
+  const generateNextPage = () => {
+    if (currentPage === numPages) return null;
+    return <NextPage to={`${basePath}/${filter}/page=${currentPage + 1}`}>Next</NextPage>;
+  };
 
   return (
     <PaginationContainer>
-      {currentPage !== 1 && prevPage}
+      {currentPage !== 1 && generatePrevPage()}
       <PaginationUl>
         {pageNumbers.map((pageNumber) => (
           <PaginationLi key={pageNumber} className={currentPage === pageNumber ? 'active' : ''}>
-            <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>{pageNumber}</StyledLink>
+            <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>
+              {pageNumber}
+            </StyledLink>
           </PaginationLi>
         ))}
       </PaginationUl>
-      {nextPage}
+      {generateNextPage()}
     </PaginationContainer>
   );
 };
