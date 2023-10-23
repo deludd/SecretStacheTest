@@ -39,4 +39,12 @@ export const AnimeFilterItem = styled.li`
 export const AnimeFilterLink = styled(Link)`
   text-decoration: none;
   color: black;
+
+  &.activeFilter {
+    color: #0056b3;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
 `;

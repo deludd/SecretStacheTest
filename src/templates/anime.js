@@ -4,6 +4,7 @@ import Layout from '../components/layout';
 import Seo from '../components/seo';
 import SingleAnimeCard from '../components/singleAnimeCard';
 import Pagination from '../components/paginationBar';
+import LoadingSpinner from '../components/loadingSpinner';
 import {
   AnimeGrid,
   AnimeCardContainer,
@@ -11,7 +12,12 @@ import {
   AnimeFilterItem,
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
-import LoadingSpinner from '../components/loadingSpinner';
+
+import {
+  getAnimeTitlesFromLocalStorage,
+  setAnimeTitlesToLocalStorage,
+  isAnimeTitlesUpdated,
+} from '../utils/localStorageFunction';
 
 const Anime = ({ pageContext }) => {
   const { currentPage, totalPages, currentFilter, animeTitles: animeTitlesFromContext } = pageContext;
@@ -52,34 +58,38 @@ const Anime = ({ pageContext }) => {
 
   useEffect(() => {
     setLoading(true);
-    const storedAnimeTitles = typeof window !== 'undefined' ? localStorage.getItem('animeTitles') : null;
 
-    if (!storedAnimeTitles || JSON.stringify(animeTitlesFromContext) !== storedAnimeTitles) {
-      localStorage.setItem('animeTitles', JSON.stringify(animeTitlesFromContext));
+    const storedAnimeTitles = getAnimeTitlesFromLocalStorage();
+
+    if (!storedAnimeTitles || isAnimeTitlesUpdated()) {
+      setAnimeTitlesToLocalStorage(animeTitlesFromContext);
     }
 
-    const fullList = storedAnimeTitles ? JSON.parse(storedAnimeTitles) : animeTitlesFromContext;
+    const fullList = storedAnimeTitles || animeTitlesFromContext;
     setAnimeList(updateAnimeList(fullList, currentFilter, currentPage));
     setLoading(false);
   }, [animeTitlesFromContext, currentFilter, currentPage, updateAnimeList]);
+
+  const handleFilterClick = (filterValue) => {
+    const storedAnimeTitles = localStorage.getItem('animeTitles');
+    const fullList = JSON.parse(storedAnimeTitles);
+    setAnimeList(updateAnimeList(fullList, filterValue, currentPage));
+  };
 
   return (
     <Layout>
       <Seo title="Anime" />
       {loading ? (
-        <LoadingSpinner>Загрузка...</LoadingSpinner>
+        <LoadingSpinner />
       ) : (
         <Fragment>
           <AnimeFilters>
             {filters.map(({ name, value }) => (
               <AnimeFilterItem key={value}>
                 <AnimeFilterLink
-                  onClick={() => {
-                    const storedAnimeTitles = localStorage.getItem('animeTitles');
-                    const fullList = JSON.parse(storedAnimeTitles);
-                    setAnimeList(updateAnimeList(fullList, value, currentPage));
-                  }}
+                  onClick={() => handleFilterClick(value)}
                   to={`${basePath}/${value}/page=${currentPage}`}
+                  className={currentFilter === value ? 'activeFilter' : ''}
                 >
                   {name}
                 </AnimeFilterLink>

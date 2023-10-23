@@ -35,13 +35,21 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
     return <NextPage to={`${basePath}/${filter}/page=${currentPage + 1}`}>Next</NextPage>;
   };
 
+  const handlePageClick = (e, pageNumber) => {
+    if (currentPage === pageNumber) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <PaginationContainer>
       {currentPage !== 1 && generatePrevPage()}
       <PaginationUl>
         {pageNumbers.map((pageNumber) => (
           <PaginationLi key={pageNumber} className={currentPage === pageNumber ? 'active' : ''}>
-            <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`}>{pageNumber}</StyledLink>
+            <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`} onClick={(e) => handlePageClick(e, pageNumber)}>
+              {pageNumber}
+            </StyledLink>
           </PaginationLi>
         ))}
       </PaginationUl>

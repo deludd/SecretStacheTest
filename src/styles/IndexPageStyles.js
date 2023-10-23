@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 
 export const Container = styled.div`
   display: flex;
@@ -26,11 +27,12 @@ export const ButtonGroup = styled.div`
   margin-top: 20px;
 `;
 
-export const ExploreButton = styled.a`
+export const ExploreButton = styled(Link)`
   display: inline-block;
   padding: 10px 30px;
   font-size: 18px;
-  background-color: #007bff;
+  /* background-color: #007bff; */
+  background-color: #0056b3;
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -40,7 +42,8 @@ export const ExploreButton = styled.a`
 
   &:hover {
     transform: translateY(-5px);
-    background-color: #0056b3;
+    background-color: #007bff;
+    /* background-color: #0056b3; */
     color: #fff;
   }
 `;

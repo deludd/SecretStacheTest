@@ -12,7 +12,7 @@ const IndexPage = () => {
         <Paper>
           <Subtitle>Welcome to a AnimeStache Project</Subtitle>
           <ButtonGroup>
-            <ExploreButton href="/anime/all/page=1">Explore</ExploreButton>
+            <ExploreButton to="/anime/all/page=1">Explore</ExploreButton>
           </ButtonGroup>
         </Paper>
       </Container>

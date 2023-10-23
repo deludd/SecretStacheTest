@@ -47,14 +47,9 @@ export const StyledLink = styled(Link)`
   height: 100%;
   line-height: inherit;
 
-  &&.active {
-    color: #fff;
-    background-color: #0056b3;
-  }
-
+  &.active,
   &:hover {
     color: #fff;
-    background-color: #0056b3;
   }
 `;
 
@@ -77,7 +72,15 @@ export const PaginationLi = styled.li`
     background-color 0.3s,
     color 0.3s;
 
-  &.active,
+  &.active {
+    background-color: #0056b3;
+    color: #fff;
+
+    &:hover {
+      background-color: #007bff;
+    }
+  }
+
   &:hover {
     background-color: #0056b3;
     color: #fff;

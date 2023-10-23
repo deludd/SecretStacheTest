@@ -44,11 +44,9 @@ const Header = () => {
       <HeaderContainer>
         <NavList>
           <NavItem>
-            <Logo className="title">
-              <Link to="/" className="navLink">
-                AnimeStache
-              </Link>
-            </Logo>
+            <Link to="/">
+              <Logo>AnimeStache</Logo>
+            </Link>
           </NavItem>
           <NavItem>
             <SearchInput type="text" value={searchValue} onChange={handleInputChange} placeholder="Search anime..." />

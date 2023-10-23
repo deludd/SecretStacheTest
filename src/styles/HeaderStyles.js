@@ -33,6 +33,11 @@ export const NavItem = styled.div`
 export const Logo = styled.h6`
   margin-left: 40px;
   font-size: 20px;
+  color: #0056b3;
+
+  &:hover {
+    color: #007bff;
+  }
 `;
 
 export const SearchInput = styled.input`

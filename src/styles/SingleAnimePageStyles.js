@@ -34,7 +34,7 @@ export const AnimeTitle = styled.h2`
 
 export const BackButton = styled.span`
   font-size: 1rem;
-  color: #007bff;
+  color: #0056b3;
   cursor: pointer;
   display: block;
   margin-bottom: 10px;
@@ -43,6 +43,7 @@ export const BackButton = styled.span`
 
   &:hover {
     transform: translateY(-5px);
+    color: #007bff;
   }
 
   &:before {
@@ -56,6 +57,10 @@ export const BackButtonOnBanner = styled(BackButton)`
   position: absolute;
   top: 10px;
   left: 10px;
+
+  &:hover {
+    color: #fff;
+  }
 `;
 
 export const AnimeTitleOnBanner = styled(AnimeTitle)`
