@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Header from './header';
 import { GlobalStyles, Container } from '../styles/LayoutSyles';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, currentId }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleAndAllAnimeQuery {
       site {
@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyles />
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={data.site.siteMetadata.title} currentId={currentId} />
       <Container>
         <main>{children}</main>
       </Container>

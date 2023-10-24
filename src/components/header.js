@@ -12,7 +12,7 @@ import {
   HeaderContainer,
 } from '../styles/HeaderStyles';
 
-const Header = () => {
+const Header = ({ currentId }) => {
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [animeList, setAnimeList] = useState([]);
@@ -35,7 +35,10 @@ const Header = () => {
       return;
     }
 
-    const results = animeList.filter((anime) => anime.title.romaji.toLowerCase().includes(query.toLowerCase()));
+    const results = animeList.filter(
+      (anime) => anime.title.romaji.toLowerCase().includes(query.toLowerCase()) && anime.id !== currentId,
+    );
+
     setSearchResults(results);
   };
 

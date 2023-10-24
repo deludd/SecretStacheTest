@@ -31,6 +31,7 @@ const SingleAnime = ({
   } = anime;
   const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
   const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
+  const currentId = anime.id;
 
   if (errors) {
     return (
@@ -44,7 +45,7 @@ const SingleAnime = ({
   const formattedDate = `${startDate.year}-${startDate.month}-${startDate.day}`;
 
   return (
-    <Layout>
+    <Layout currentId={currentId}>
       <Seo title={romaji} />
       <AnimeContainer>
         {bannerImageSharp ? (

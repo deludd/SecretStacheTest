@@ -32,7 +32,9 @@ export const ExploreButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
-  transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
   z-index: 999;
 
   &:hover {

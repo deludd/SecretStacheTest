@@ -78,9 +78,14 @@ export const SearchResults = styled.div`
   }
 `;
 
-
 export const SearchLink = styled(Link)`
+  display: block;
   color: #333;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
 
   @media (max-width: 768px) {
     margin-right: 20px;

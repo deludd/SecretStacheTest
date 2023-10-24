@@ -11,7 +11,6 @@ export const AnimeGrid = styled.div`
   }
 `;
 
-
 export const AnimeCardContainer = styled.div`
   position: relative;
   display: flex;
