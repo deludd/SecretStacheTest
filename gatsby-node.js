@@ -1,5 +1,5 @@
-const { ANIME_PER_PAGE, MAX_RETRIES, MAX_ANIME_COUNT, DELAY_INCREMENT } = require('./src/utils/constants.common');
-const { getAllAnimeIDs } = require('./src/utils/fetchFunctions');
+const { ANIME_PER_PAGE, MAX_ANIME_COUNT } = require('./src/utils/constants.common');
+const { getAllAnimeIDs } = require('./src/utils/getAllAnimeIDs');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -8,7 +8,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   let animeData;
   try {
-    animeData = await getAllAnimeIDs(graphql, MAX_ANIME_COUNT, MAX_RETRIES, DELAY_INCREMENT);
+    animeData = await getAllAnimeIDs(graphql, MAX_ANIME_COUNT);
   } catch (error) {
     console.error('Error fetching anime data:', error);
     return;
