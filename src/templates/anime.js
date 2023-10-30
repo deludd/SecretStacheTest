@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback, Fragment } from 'react';
-import { Link } from 'gatsby';
+import React, { useState, Fragment } from 'react';
+import { graphql, Link } from 'gatsby';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 import SingleAnimeCard from '../components/singleAnimeCard';
@@ -13,68 +13,40 @@ import {
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
 
-import {
-  getAnimeTitlesFromLocalStorage,
-  setAnimeTitlesToLocalStorage,
-  isAnimeTitlesUpdated,
-} from '../utils/localStorageFunction';
+const filters = [
+  {
+    label: 'All',
+    slug: 'all',
+    value: 'ID',
+  },
+  {
+    label: 'Popularity',
+    slug: 'popularity',
+    value: 'POPULARITY_DESC',
+  },
+  {
+    label: 'Favorites',
+    slug: 'favorites',
+    value: 'FAVOURITES_DESC',
+  },
+  {
+    label: 'Trending',
+    slug: 'trending',
+    value: 'TRENDING_DESC',
+  },
+];
 
-const Anime = ({ pageContext }) => {
-  const { currentPage, totalPages, currentFilter, animeTitles: animeTitlesFromContext } = pageContext;
-  const [animeList, setAnimeList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const basePath = '/anime';
-
-  const filters = [
-    { name: 'All', value: 'all' },
-    { name: 'Popularity', value: 'popularity' },
-    { name: 'Favourites', value: 'favourites' },
-    { name: 'Episodes', value: 'episodes' },
-  ];
-
-  const sortByCriteria = useCallback((list, criteria) => {
-    const sortedList = [...list];
-    switch (criteria) {
-      case 'popularity':
-        return sortedList.sort((a, b) => b.popularity - a.popularity);
-      case 'favourites':
-        return sortedList.sort((a, b) => b.favourites - a.favourites);
-      case 'episodes':
-        return sortedList.sort((a, b) => b.episodes - a.episodes);
-      default:
-        return sortedList;
-    }
-  }, []);
-
-  const updateAnimeList = useCallback(
-    (fullList, filter, page) => {
-      const sortedList = sortByCriteria(fullList, filter);
-      const start = (page - 1) * 6;
-      const end = start + 6;
-      return sortedList.slice(start, end);
+const Anime = ({
+  data: {
+    anilist: {
+      Page: { media: animeList },
     },
-    [sortByCriteria],
-  );
-
-  useEffect(() => {
-    setLoading(true);
-
-    const storedAnimeTitles = getAnimeTitlesFromLocalStorage();
-
-    if (!storedAnimeTitles || isAnimeTitlesUpdated()) {
-      setAnimeTitlesToLocalStorage(animeTitlesFromContext);
-    }
-
-    const fullList = storedAnimeTitles || animeTitlesFromContext;
-    setAnimeList(updateAnimeList(fullList, currentFilter, currentPage));
-    setLoading(false);
-  }, [animeTitlesFromContext, currentFilter, currentPage, updateAnimeList]);
-
-  const handleFilterClick = (filterValue) => {
-    const storedAnimeTitles = localStorage.getItem('animeTitles');
-    const fullList = JSON.parse(storedAnimeTitles);
-    setAnimeList(updateAnimeList(fullList, filterValue, currentPage));
-  };
+  },
+  pageContext,
+}) => {
+  const { currentPage, totalPages, currentFilter } = pageContext;
+  const [loading, setLoading] = useState(false);
+  const basePath = '/anime';
 
   return (
     <Layout>
@@ -84,14 +56,14 @@ const Anime = ({ pageContext }) => {
       ) : (
         <Fragment>
           <AnimeFilters>
-            {filters.map(({ name, value }) => (
+            {filters.map(({ label, slug, value }) => (
               <AnimeFilterItem key={value}>
                 <AnimeFilterLink
-                  onClick={() => handleFilterClick(value)}
-                  to={`${basePath}/${value}/page=${currentPage}`}
-                  className={currentFilter === value ? 'activeFilter' : ''}
+                  onClick={() => console.log('click')}
+                  to={`${basePath}/${slug}/page=1`}
+                  className={currentFilter.slug === slug ? 'activeFilter' : ''}
                 >
-                  {name}
+                  {label}
                 </AnimeFilterLink>
               </AnimeFilterItem>
             ))}
@@ -105,7 +77,7 @@ const Anime = ({ pageContext }) => {
               </AnimeCardContainer>
             ))}
           </AnimeGrid>
-          <Pagination currentPage={currentPage} filter={currentFilter} numPages={totalPages} basePath={basePath} />
+          <Pagination currentPage={currentPage} filter={currentFilter.slug} numPages={totalPages} basePath={basePath} />
         </Fragment>
       )}
     </Layout>
@@ -113,3 +85,27 @@ const Anime = ({ pageContext }) => {
 };
 
 export default Anime;
+
+export const pageQuery = graphql`
+  query ($currentPage: Int!, $perPage: Int!, $currentFilterValue: ANILIST_MediaSort) {
+    anilist {
+      Page(page: $currentPage, perPage: $perPage) {
+        media(sort: [$currentFilterValue]) {
+          id
+          title {
+            english
+            romaji
+          }
+          coverImage {
+            large
+            largeSharp {
+              childImageSharp {
+                gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

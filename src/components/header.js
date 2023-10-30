@@ -36,7 +36,7 @@ const Header = ({ currentId }) => {
     }
 
     const results = animeList.filter(
-      (anime) => anime.title.romaji.toLowerCase().includes(query.toLowerCase()) && anime.id !== currentId,
+      (anime) => anime.title.english.toLowerCase().includes(query.toLowerCase()) && anime.id !== currentId,
     );
 
     setSearchResults(results);
@@ -57,7 +57,7 @@ const Header = ({ currentId }) => {
               <SearchResults>
                 {searchResults.slice(0, 5).map(({ title, id }) => (
                   <SearchLink to={`/anime/id=${id}`} key={id}>
-                    <SearchResultItem>{title.romaji}</SearchResultItem>
+                    <SearchResultItem>{title.english}</SearchResultItem>
                   </SearchLink>
                 ))}
               </SearchResults>

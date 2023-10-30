@@ -8,8 +8,8 @@ const SingleAnimeCard = ({ data: { title, coverImage } }) => {
 
   return (
     <AnimeCardContainer>
-      <GatsbyImage image={imageAvatar} alt={title.romaji} />
-      <AnimeTitle>{title.romaji}</AnimeTitle>
+      <GatsbyImage image={imageAvatar} alt={title.english} />
+      <AnimeTitle>{title.english ? title.english : title.romaji}</AnimeTitle>
     </AnimeCardContainer>
   );
 };

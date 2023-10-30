@@ -17,21 +17,22 @@ import {
 } from '../styles/SingleAnimePageStyles';
 
 const SingleAnime = ({
-  pageContext: { coverImage },
   data: {
     anilist: { Media: anime },
   },
   errors,
 }) => {
   const {
-    title: { romaji },
+    title: { english, romaji },
     startDate,
     bannerImageSharp,
+    coverImage,
     description,
   } = anime;
   const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
   const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
   const currentId = anime.id;
+  const animeTitle = english ? english : romaji;
 
   if (errors) {
     return (
@@ -46,25 +47,25 @@ const SingleAnime = ({
 
   return (
     <Layout currentId={currentId}>
-      <Seo title={romaji} />
+      <Seo title={animeTitle} />
       <AnimeContainer>
         {bannerImageSharp ? (
           <>
             <BannerContainer>
-              <BannerImage image={imageBanner} alt={romaji} />
-              <AnimeTitleOnBanner>{romaji}</AnimeTitleOnBanner>
+              <BannerImage image={imageBanner} alt={animeTitle} />
+              <AnimeTitleOnBanner>{animeTitle}</AnimeTitleOnBanner>
               <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
             </BannerContainer>
           </>
         ) : (
           <>
             <BackButton onClick={() => window.history.back()}>Back</BackButton>
-            <AnimeTitle>{romaji}</AnimeTitle>
+            <AnimeTitle>{animeTitle}</AnimeTitle>
           </>
         )}
-        <GatsbyImage image={imageAvatar} alt={romaji} />
+        <GatsbyImage image={imageAvatar} alt={animeTitle} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
-        <AnimeDescription>{parse(description)}</AnimeDescription>
+        <AnimeDescription>{description ? parse(description) : ''}</AnimeDescription>
       </AnimeContainer>
     </Layout>
   );
@@ -78,6 +79,7 @@ export const pageQuery = graphql`
       Media(id: $id) {
         id
         title {
+          english
           romaji
         }
         startDate {
@@ -89,6 +91,14 @@ export const pageQuery = graphql`
         bannerImageSharp {
           childImageSharp {
             gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED)
+          }
+        }
+        coverImage {
+          large
+          largeSharp {
+            childImageSharp {
+              gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
+            }
           }
         }
         description
