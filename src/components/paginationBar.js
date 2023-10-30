@@ -14,25 +14,44 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
 
   useEffect(() => {
     const totalPages = Math.ceil(numPages);
-    const startPage = Math.max(currentPage - Math.floor(PAGES_TO_SHOW / 2), 1);
-    const endPage = Math.min(startPage + PAGES_TO_SHOW - 1, totalPages);
-
+    let startPage;
+    let endPage;
+  
+    if (currentPage + Math.floor(PAGES_TO_SHOW / 2) >= totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(totalPages - PAGES_TO_SHOW + 1, 1);
+    } else {
+      startPage = Math.max(currentPage - Math.floor(PAGES_TO_SHOW / 2), 1);
+      endPage = Math.min(startPage + PAGES_TO_SHOW - 1, totalPages);
+    }
+  
     const numbers = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
     setPageNumbers(numbers);
   }, [currentPage, numPages]);
+  
 
   const generatePrevPage = () => {
-    if (currentPage === 1) return null;
+    const isDisabled = currentPage === 1;
     return (
-      <PreviousPage to={`${basePath}/${filter}/page=${currentPage - 1}`} rel="prev">
+      <PreviousPage
+        to={isDisabled ? '#' : `${basePath}/${filter}/page=${currentPage - 1}`}
+        className={isDisabled ? 'disabled' : ''}
+      >
         Previous
       </PreviousPage>
     );
   };
 
   const generateNextPage = () => {
-    if (currentPage === numPages) return null;
-    return <NextPage to={`${basePath}/${filter}/page=${currentPage + 1}`}>Next</NextPage>;
+    const isDisabled = currentPage === numPages;
+    return (
+      <NextPage
+        to={isDisabled ? '#' : `${basePath}/${filter}/page=${currentPage + 1}`}
+        className={isDisabled ? 'disabled' : ''}
+      >
+        Next
+      </NextPage>
+    );
   };
 
   const handlePageClick = (e, pageNumber) => {
@@ -43,7 +62,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
 
   return (
     <PaginationContainer>
-      {currentPage !== 1 && generatePrevPage()}
+     {generatePrevPage()}
       <PaginationUl>
         {pageNumbers.map((pageNumber) => (
           <PaginationLi key={pageNumber} className={currentPage === pageNumber ? 'active' : ''}>

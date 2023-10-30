@@ -70,11 +70,11 @@ const Anime = ({
           </AnimeFilters>
           <AnimeGrid>
             {animeList.map((anime) => (
-              <AnimeCardContainer key={anime.id}>
-                <Link to={`${basePath}/id=${anime.id}`}>
-                  <SingleAnimeCard data={anime} />
-                </Link>
-              </AnimeCardContainer>
+              <Link to={`${basePath}/id=${anime.id}`}>
+                <AnimeCardContainer key={anime.id}>
+                    <SingleAnimeCard data={anime} />
+                </AnimeCardContainer>
+              </Link>
             ))}
           </AnimeGrid>
           <Pagination currentPage={currentPage} filter={currentFilter.slug} numPages={totalPages} basePath={basePath} />

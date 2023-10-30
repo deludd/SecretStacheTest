@@ -21,6 +21,7 @@ export const AnimeCardContainer = styled.div`
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  height: 350px;
 
   &:hover {
     transform: translateY(-10px);
