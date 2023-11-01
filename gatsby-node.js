@@ -37,8 +37,11 @@ exports.createPages = async ({ graphql, actions }) => {
       return;
     }
 
-    const animeIDs = animeData.map((anime) => anime.id);
-    const totalPagesToCreate = Math.ceil(animeIDs.length / ANIME_PER_PAGE);
+    const animeDetails = animeData.map((anime) => ({
+      id: anime.id,
+      title: anime.title,
+    }));
+    const totalPagesToCreate = Math.ceil(animeDetails.length / ANIME_PER_PAGE);
     const animePageTemplate = require.resolve('./src/templates/anime.js');
     const singleAnimeTemplate = require.resolve('./src/templates/singleAnime.js');
 
@@ -58,12 +61,13 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     });
 
-    animeIDs.forEach((id) => {
+    animeDetails.forEach((anime) => {
       createPage({
-        path: `/anime/id=${id}`,
+        path: `/anime/id=${anime.id}`,
         component: singleAnimeTemplate,
         context: {
-          id,
+          id: anime.id,
+          userPreferred: anime.title.userPreferred,
         },
       });
     });

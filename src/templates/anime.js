@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { graphql, Link } from 'gatsby';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
@@ -48,6 +48,13 @@ const Anime = ({
   const [loading, setLoading] = useState(false);
   const basePath = '/anime';
 
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 300);
+  }, [animeList]);
+
   return (
     <Layout>
       <Seo title="Anime" />
@@ -59,6 +66,7 @@ const Anime = ({
             {filters.map(({ label, slug, value }) => (
               <AnimeFilterItem key={value}>
                 <AnimeFilterLink
+                  key={value}
                   onClick={() => console.log('click')}
                   to={`${basePath}/${slug}/page=1`}
                   className={currentFilter.slug === slug ? 'activeFilter' : ''}
@@ -70,9 +78,9 @@ const Anime = ({
           </AnimeFilters>
           <AnimeGrid>
             {animeList.map((anime) => (
-              <Link to={`${basePath}/id=${anime.id}`}>
+              <Link to={`${basePath}/id=${anime.id}`} key={anime.id}>
                 <AnimeCardContainer key={anime.id}>
-                    <SingleAnimeCard data={anime} />
+                  <SingleAnimeCard key={anime.id} data={anime} />
                 </AnimeCardContainer>
               </Link>
             ))}
@@ -93,8 +101,7 @@ export const pageQuery = graphql`
         media(sort: [$currentFilterValue]) {
           id
           title {
-            english
-            romaji
+            userPreferred
           }
           coverImage {
             large

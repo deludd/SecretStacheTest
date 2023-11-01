@@ -12,8 +12,7 @@ const getAllAnimeIDs = async (graphql, maxAnimeCount, currentFilterValue) => {
                 media(sort: [$currentFilterValue]) {
                   id
                   title {
-                    english
-                    romaji
+                    userPreferred
                   }
                   coverImage {
                     large

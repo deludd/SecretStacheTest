@@ -16,7 +16,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
     const totalPages = Math.ceil(numPages);
     let startPage;
     let endPage;
-  
+
     if (currentPage + Math.floor(PAGES_TO_SHOW / 2) >= totalPages) {
       endPage = totalPages;
       startPage = Math.max(totalPages - PAGES_TO_SHOW + 1, 1);
@@ -24,11 +24,10 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
       startPage = Math.max(currentPage - Math.floor(PAGES_TO_SHOW / 2), 1);
       endPage = Math.min(startPage + PAGES_TO_SHOW - 1, totalPages);
     }
-  
+
     const numbers = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
     setPageNumbers(numbers);
   }, [currentPage, numPages]);
-  
 
   const generatePrevPage = () => {
     const isDisabled = currentPage === 1;
@@ -62,7 +61,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
 
   return (
     <PaginationContainer>
-     {generatePrevPage()}
+      {generatePrevPage()}
       <PaginationUl>
         {pageNumbers.map((pageNumber) => (
           <PaginationLi key={pageNumber} className={currentPage === pageNumber ? 'active' : ''}>

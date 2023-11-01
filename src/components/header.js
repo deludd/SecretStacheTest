@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
+import React, { useState } from 'react';
+import { Link, graphql, useStaticQuery } from 'gatsby';
+import { useLunr } from 'react-lunr';
 import {
   HeaderWrapper,
   NavItem,
@@ -12,34 +13,32 @@ import {
   HeaderContainer,
 } from '../styles/HeaderStyles';
 
-const Header = ({ currentId }) => {
+const Header = () => {
   const [searchValue, setSearchValue] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [animeList, setAnimeList] = useState([]);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedAnimeTitles = localStorage.getItem('animeTitles');
-      if (storedAnimeTitles) {
-        setAnimeList(JSON.parse(storedAnimeTitles));
+  const data = useStaticQuery(graphql`
+    query SearchIndexQuery {
+      allLocalSearchPages {
+        nodes {
+          store
+          index
+        }
       }
     }
-  }, []);
+  `);
+
+  const combinedStore = data.allLocalSearchPages.nodes.reduce((acc, node) => {
+    return Object.assign(acc, node.store);
+  }, {});
+
+  const combinedIndex = data.allLocalSearchPages.nodes.reduce((acc, node) => {
+    return Object.assign(acc, JSON.parse(node.index));
+  }, {});
+
+  const searchResults = useLunr(searchValue, combinedIndex, combinedStore);
 
   const handleInputChange = (event) => {
-    const query = event.target.value;
-    setSearchValue(query);
-
-    if (!query) {
-      setSearchResults([]);
-      return;
-    }
-
-    const results = animeList.filter(
-      (anime) => anime.title.english.toLowerCase().includes(query.toLowerCase()) && anime.id !== currentId,
-    );
-
-    setSearchResults(results);
+    setSearchValue(event.target.value);
   };
 
   return (
@@ -52,12 +51,19 @@ const Header = ({ currentId }) => {
             </Link>
           </NavItem>
           <NavItem>
-            <SearchInput type="text" value={searchValue} onChange={handleInputChange} placeholder="Search anime..." />
-            {searchResults.length > 0 && (
+            <SearchInput
+              type="text"
+              id="search-input"
+              name="search"
+              value={searchValue}
+              onChange={handleInputChange}
+              placeholder="Search anime..."
+            />
+            {searchResults && searchResults.length > 0 && (
               <SearchResults>
-                {searchResults.slice(0, 5).map(({ title, id }) => (
-                  <SearchLink to={`/anime/id=${id}`} key={id}>
-                    <SearchResultItem>{title.english}</SearchResultItem>
+                {searchResults.slice(0, 5).map((result, id) => (
+                  <SearchLink to={result.path} key={id}>
+                    <SearchResultItem key={id}>{result.userPreferred}</SearchResultItem>
                   </SearchLink>
                 ))}
               </SearchResults>

@@ -23,7 +23,7 @@ const SingleAnime = ({
   errors,
 }) => {
   const {
-    title: { english, romaji },
+    title: { userPreferred },
     startDate,
     bannerImageSharp,
     coverImage,
@@ -32,7 +32,6 @@ const SingleAnime = ({
   const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
   const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
   const currentId = anime.id;
-  const animeTitle = english ? english : romaji;
 
   if (errors) {
     return (
@@ -47,23 +46,23 @@ const SingleAnime = ({
 
   return (
     <Layout currentId={currentId}>
-      <Seo title={animeTitle} />
+      <Seo title={userPreferred} />
       <AnimeContainer>
         {bannerImageSharp ? (
           <>
             <BannerContainer>
-              <BannerImage image={imageBanner} alt={animeTitle} />
-              <AnimeTitleOnBanner>{animeTitle}</AnimeTitleOnBanner>
+              <BannerImage image={imageBanner} alt={userPreferred} />
+              <AnimeTitleOnBanner>{userPreferred}</AnimeTitleOnBanner>
               <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
             </BannerContainer>
           </>
         ) : (
           <>
             <BackButton onClick={() => window.history.back()}>Back</BackButton>
-            <AnimeTitle>{animeTitle}</AnimeTitle>
+            <AnimeTitle>{userPreferred}</AnimeTitle>
           </>
         )}
-        <GatsbyImage image={imageAvatar} alt={animeTitle} />
+        <GatsbyImage image={imageAvatar} alt={userPreferred} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{description ? parse(description) : ''}</AnimeDescription>
       </AnimeContainer>
@@ -79,8 +78,7 @@ export const pageQuery = graphql`
       Media(id: $id) {
         id
         title {
-          english
-          romaji
+          userPreferred
         }
         startDate {
           year
