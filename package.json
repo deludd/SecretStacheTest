@@ -6,6 +6,7 @@
   "author": "Artem Dymytrov <adimitrov2000@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^2.1.4",
+    "flexsearch": "^0.7.31",
     "gatsby": "^5.12.7",
     "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-image": "^3.12.1",
@@ -29,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-lunr": "^1.1.0",
+    "react-use-flexsearch": "^0.1.1",
     "styled-components": "^6.0.8"
   },
   "devDependencies": {

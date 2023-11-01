@@ -22,6 +22,14 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-remark`,
     {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'ANILIST',
+        fieldName: 'anilist',
+        url: 'https://graphql.anilist.co',
+      },
+    },
+    {
       resolve: `gatsby-plugin-sharp`,
       options: {
         base64Width: 20,
@@ -49,6 +57,13 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/src/pages`,
       },
     },
     {
@@ -80,17 +95,9 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'ANILIST',
-        fieldName: 'anilist',
-        url: 'https://graphql.anilist.co',
-      },
-    },
-    {
       resolve: 'gatsby-plugin-local-search',
       options: {
-        name: 'pages',
+        name: 'titles',
         engine: 'lunr',
         query: `
           {

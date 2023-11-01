@@ -1,6 +1,27 @@
 module.exports = {
   ANIME_PER_PAGE: 6,
-  MAX_RETRIES: 5,
-  DELAY_INCREMENT: 10000,
-  MAX_ANIME_COUNT: 24,
+  MAX_ANIME_COUNT: 12,
 };
+
+module.exports.filters = [
+  {
+    label: 'All',
+    slug: 'all',
+    value: 'ID',
+  },
+  {
+    label: 'Popularity',
+    slug: 'popularity',
+    value: 'POPULARITY_DESC',
+  },
+  {
+    label: 'Favorites',
+    slug: 'favorites',
+    value: 'FAVOURITES_DESC',
+  },
+  {
+    label: 'Trending',
+    slug: 'trending',
+    value: 'TRENDING_DESC',
+  },
+];

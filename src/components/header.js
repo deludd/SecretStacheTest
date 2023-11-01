@@ -18,7 +18,7 @@ const Header = () => {
 
   const data = useStaticQuery(graphql`
     query SearchIndexQuery {
-      allLocalSearchPages {
+      allLocalSearchTitles {
         nodes {
           store
           index
@@ -27,11 +27,11 @@ const Header = () => {
     }
   `);
 
-  const combinedStore = data.allLocalSearchPages.nodes.reduce((acc, node) => {
+  const combinedStore = data.allLocalSearchTitles.nodes.reduce((acc, node) => {
     return Object.assign(acc, node.store);
   }, {});
 
-  const combinedIndex = data.allLocalSearchPages.nodes.reduce((acc, node) => {
+  const combinedIndex = data.allLocalSearchTitles.nodes.reduce((acc, node) => {
     return Object.assign(acc, JSON.parse(node.index));
   }, {});
 

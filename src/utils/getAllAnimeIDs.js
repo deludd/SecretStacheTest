@@ -14,17 +14,6 @@ const getAllAnimeIDs = async (graphql, maxAnimeCount, currentFilterValue) => {
                   title {
                     userPreferred
                   }
-                  coverImage {
-                    large
-                    largeSharp {
-                      childImageSharp {
-                        gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
-                      }
-                    }
-                  }
-                  popularity
-                  trending
-                  favourites
                 }
               }
             }
@@ -39,7 +28,9 @@ const getAllAnimeIDs = async (graphql, maxAnimeCount, currentFilterValue) => {
     );
   }
   const results = await Promise.all(requests);
-  return results.flatMap((result) => result.data.anilist.Page.media);
+  const allAnime = results.flatMap((result) => result.data.anilist.Page.media);
+
+  return allAnime.slice(0, maxAnimeCount);
 };
 
 module.exports = { getAllAnimeIDs };

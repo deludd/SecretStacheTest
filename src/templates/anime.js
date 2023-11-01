@@ -1,10 +1,10 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 import SingleAnimeCard from '../components/singleAnimeCard';
 import Pagination from '../components/paginationBar';
-import LoadingSpinner from '../components/loadingSpinner';
+import { BASE_PATH } from '../utils/constants.es6';
 import {
   AnimeGrid,
   AnimeCardContainer,
@@ -12,29 +12,7 @@ import {
   AnimeFilterItem,
   AnimeFilterLink,
 } from '../styles/AnimePageStyles';
-
-const filters = [
-  {
-    label: 'All',
-    slug: 'all',
-    value: 'ID',
-  },
-  {
-    label: 'Popularity',
-    slug: 'popularity',
-    value: 'POPULARITY_DESC',
-  },
-  {
-    label: 'Favorites',
-    slug: 'favorites',
-    value: 'FAVOURITES_DESC',
-  },
-  {
-    label: 'Trending',
-    slug: 'trending',
-    value: 'TRENDING_DESC',
-  },
-];
+import { filters } from '../utils/constants.es6.js';
 
 const Anime = ({
   data: {
@@ -45,49 +23,33 @@ const Anime = ({
   pageContext,
 }) => {
   const { currentPage, totalPages, currentFilter } = pageContext;
-  const [loading, setLoading] = useState(false);
-  const basePath = '/anime';
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
-  }, [animeList]);
 
   return (
     <Layout>
       <Seo title="Anime" />
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <Fragment>
-          <AnimeFilters>
-            {filters.map(({ label, slug, value }) => (
-              <AnimeFilterItem key={value}>
-                <AnimeFilterLink
-                  key={value}
-                  onClick={() => console.log('click')}
-                  to={`${basePath}/${slug}/page=1`}
-                  className={currentFilter.slug === slug ? 'activeFilter' : ''}
-                >
-                  {label}
-                </AnimeFilterLink>
-              </AnimeFilterItem>
-            ))}
-          </AnimeFilters>
-          <AnimeGrid>
-            {animeList.map((anime) => (
-              <Link to={`${basePath}/id=${anime.id}`} key={anime.id}>
-                <AnimeCardContainer key={anime.id}>
-                  <SingleAnimeCard key={anime.id} data={anime} />
-                </AnimeCardContainer>
-              </Link>
-            ))}
-          </AnimeGrid>
-          <Pagination currentPage={currentPage} filter={currentFilter.slug} numPages={totalPages} basePath={basePath} />
-        </Fragment>
-      )}
+      <AnimeFilters>
+        {filters.map(({ label, slug, value }) => (
+          <AnimeFilterItem key={value}>
+            <AnimeFilterLink
+              key={value}
+              to={`${BASE_PATH}/${slug}/page=1`}
+              className={currentFilter.slug === slug ? 'activeFilter' : ''}
+            >
+              {label}
+            </AnimeFilterLink>
+          </AnimeFilterItem>
+        ))}
+      </AnimeFilters>
+      <AnimeGrid>
+        {animeList.map((anime) => (
+          <Link to={`${BASE_PATH}/id=${anime.id}`} key={anime.id}>
+            <AnimeCardContainer key={anime.id}>
+              <SingleAnimeCard key={anime.id} data={anime} />
+            </AnimeCardContainer>
+          </Link>
+        ))}
+      </AnimeGrid>
+      <Pagination currentPage={currentPage} filter={currentFilter.slug} numPages={totalPages} />
     </Layout>
   );
 };

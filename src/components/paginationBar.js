@@ -7,9 +7,9 @@ import {
   NextPage,
   PreviousPage,
 } from '../styles/PaginationStyles';
-import { PAGES_TO_SHOW } from '../utils/constants.es6';
+import { PAGES_TO_SHOW, BASE_PATH } from '../utils/constants.es6';
 
-const Pagination = ({ currentPage, numPages, basePath, filter }) => {
+const Pagination = ({ currentPage, numPages, filter }) => {
   const [pageNumbers, setPageNumbers] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
     const isDisabled = currentPage === 1;
     return (
       <PreviousPage
-        to={isDisabled ? '#' : `${basePath}/${filter}/page=${currentPage - 1}`}
+        to={isDisabled ? '#' : `${BASE_PATH}/${filter}/page=${currentPage - 1}`}
         className={isDisabled ? 'disabled' : ''}
       >
         Previous
@@ -45,7 +45,7 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
     const isDisabled = currentPage === numPages;
     return (
       <NextPage
-        to={isDisabled ? '#' : `${basePath}/${filter}/page=${currentPage + 1}`}
+        to={isDisabled ? '#' : `${BASE_PATH}/${filter}/page=${currentPage + 1}`}
         className={isDisabled ? 'disabled' : ''}
       >
         Next
@@ -65,7 +65,10 @@ const Pagination = ({ currentPage, numPages, basePath, filter }) => {
       <PaginationUl>
         {pageNumbers.map((pageNumber) => (
           <PaginationLi key={pageNumber} className={currentPage === pageNumber ? 'active' : ''}>
-            <StyledLink to={`${basePath}/${filter}/page=${pageNumber}`} onClick={(e) => handlePageClick(e, pageNumber)}>
+            <StyledLink
+              to={`${BASE_PATH}/${filter}/page=${pageNumber}`}
+              onClick={(e) => handlePageClick(e, pageNumber)}
+            >
               {pageNumber}
             </StyledLink>
           </PaginationLi>

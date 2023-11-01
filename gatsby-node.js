@@ -1,29 +1,6 @@
 const { ANIME_PER_PAGE, MAX_ANIME_COUNT } = require('./src/utils/constants.common');
 const { getAllAnimeIDs } = require('./src/utils/getAllAnimeIDs');
-
-// TODO: DRY
-const filters = [
-  {
-    label: 'All',
-    slug: 'all',
-    value: 'ID',
-  },
-  {
-    label: 'Popularity',
-    slug: 'popularity',
-    value: 'POPULARITY_DESC',
-  },
-  {
-    label: 'Favorites',
-    slug: 'favorites',
-    value: 'FAVOURITES_DESC',
-  },
-  {
-    label: 'Trending',
-    slug: 'trending',
-    value: 'TRENDING_DESC',
-  },
-];
+const { filters } = require('./src/utils/constants.common');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
