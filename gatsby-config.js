@@ -26,6 +26,11 @@ module.exports = {
         typeName: 'ANILIST',
         fieldName: 'anilist',
         url: 'https://graphql.anilist.co',
+        refetchInterval: 60,
+        batch: true,
+        dataLoaderOptions: {
+          maxBatchSize: 10,
+        },
       },
     },
     {

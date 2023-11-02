@@ -1,12 +1,8 @@
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 const getAllAnimeIDs = async (graphql, maxAnimeCount, currentFilterValue) => {
   const bigPerPage = Math.min(Math.max(6, maxAnimeCount / 10), 50);
   const requests = [];
   const totalPagesToIterate = Math.ceil(maxAnimeCount / bigPerPage);
-
   for (let page = 1; page <= totalPagesToIterate; page++) {
-    await delay(2000);
     requests.push(
       graphql(
         `
