@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link, graphql, useStaticQuery } from 'gatsby';
-import { useLunr } from 'react-lunr';
+import lunr from 'lunr';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'gatsby';
 import {
   HeaderWrapper,
   NavItem,
@@ -15,30 +15,40 @@ import {
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
+  const [index, setIndex] = useState(null);
+  const [allData, setAllData] = useState([]);
+  const [results, setResults] = useState([]);
 
-  const data = useStaticQuery(graphql`
-    query SearchIndexQuery {
-      allLocalSearchTitles {
-        nodes {
-          store
-          index
-        }
-      }
-    }
-  `);
+  const fetchSearchIndex = async () => {
+    const response = await fetch('/searchIndex.json');
+    const data = await response.json();
+    setIndex(lunr.Index.load(data.index));
+    setAllData(data.allAnime);
+  };
 
-  const combinedStore = data.allLocalSearchTitles.nodes.reduce((acc, node) => {
-    return Object.assign(acc, node.store);
-  }, {});
-
-  const combinedIndex = data.allLocalSearchTitles.nodes.reduce((acc, node) => {
-    return Object.assign(acc, JSON.parse(node.index));
-  }, {});
-
-  const searchResults = useLunr(searchValue, combinedIndex, combinedStore);
+  useEffect(() => {
+    fetchSearchIndex();
+  }, []);
 
   const handleInputChange = (event) => {
-    setSearchValue(event.target.value);
+    const value = event.target.value;
+    setSearchValue(value);
+    if (index) {
+      const searchResults = index.search(`${value}*`);
+      setResults(searchResults);
+    }
+  };
+
+  const renderSearchResults = () => {
+    return results.slice(0, 5).map((result, id) => {
+      const matchedAnime = allData.find((anime) => String(anime.id) === String(result.ref));
+      if (!matchedAnime) return null;
+      return (
+        <SearchLink to={`/anime/id=${matchedAnime.id}`} key={id}>
+          <SearchResultItem>{matchedAnime.title.userPreferred}</SearchResultItem>
+        </SearchLink>
+      );
+    });
   };
 
   return (
@@ -59,15 +69,7 @@ const Header = () => {
               onChange={handleInputChange}
               placeholder="Search anime..."
             />
-            {searchResults && searchResults.length > 0 && (
-              <SearchResults>
-                {searchResults.slice(0, 5).map((result, id) => (
-                  <SearchLink to={result.path} key={id}>
-                    <SearchResultItem key={id}>{result.userPreferred}</SearchResultItem>
-                  </SearchLink>
-                ))}
-              </SearchResults>
-            )}
+            {results && results.length > 0 && <SearchResults>{renderSearchResults()}</SearchResults>}
           </NavItem>
         </NavList>
       </HeaderContainer>

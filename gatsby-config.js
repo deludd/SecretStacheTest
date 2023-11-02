@@ -94,39 +94,5 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: 'gatsby-plugin-local-search',
-      options: {
-        name: 'titles',
-        engine: 'lunr',
-        query: `
-          {
-            allSitePage {
-              nodes {
-                id
-                path
-                pageContext
-              }
-            }
-          }
-        `,
-        ref: 'id',
-        index: ['id', 'path', 'userPreferred'],
-        store: ['id', 'path', 'userPreferred'],
-        normalizer: ({ data }) => {
-          const nodes = data.allSitePage.nodes
-            .filter((node) => node.pageContext && node.pageContext.userPreferred)
-            .map((node) => ({
-              id: node.id,
-              path: node.path,
-              userPreferred: node.pageContext.userPreferred,
-            }));
-
-          console.log('Normalized nodes:', nodes);
-
-          return nodes.filter((node) => node.userPreferred);
-        },
-      },
-    },
   ],
 };

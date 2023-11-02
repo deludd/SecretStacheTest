@@ -1,62 +1,106 @@
 {
-  "timestamp": 1698866182707,
-  "hash": "b74ca3796c7c78c07aef7966a375959c",
+  "timestamp": 1698925528192,
+  "hash": "62ebaf3e2a39a79e7a0db7fdfb1c822d",
   "assets": {
-    "/anime/all/page=1/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/all/page=2/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
     "/anime/id=1/": {
       "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
     },
     "/anime/id=5/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=6/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=7/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=8/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=15/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=16/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=17/": {
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
       "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=18/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=19/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=20/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=21/": {
       "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+    },
+    "/anime/all/page=1/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/all/page=2/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=16498/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=101922/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=1535/": {
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+    },
+    "/anime/id=21459/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=113415/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=11061/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=21087/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=20605/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=20958/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=11757/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=5114/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/popularity/page=1/": {
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
@@ -66,133 +110,93 @@
       "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
     },
-    "/anime/id=16498/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=101922/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=1535/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=21459/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=113415/": {
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
-    },
-    "/anime/id=11061/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=21087/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=20605/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=20958/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=11757/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=5114/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/favorites/page=1/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/favorites/page=2/": {
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
-    },
     "/anime/id=9253/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=20954/": {
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+    },
+    "/anime/id=105778/": {
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
       "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
-    "/anime/id=105778/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
     "/anime/id=30013/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=1735/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
-    "/anime/trending/page=1/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+    "/anime/favorites/page=1/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
-    "/anime/trending/page=2/": {
+    "/anime/favorites/page=2/": {
       "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
     },
     "/anime/id=161964/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
-    "/anime/id=159559/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=154214/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=163329/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+    "/anime/id=101517/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=145064/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
-    "/anime/id=154587/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+    "/anime/id=74347/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
-    "/anime/id=151512/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
-    },
-    "/anime/id=158927/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+    "/anime/id=163329/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/anime/id=99088/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=154587/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=154214/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=132144/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/id=158927/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/trending/page=1/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
+    },
+    "/anime/trending/page=2/": {
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/dev-404-page/": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/404/": {
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
       "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/404.html": {
-      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true,
-      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true
+      "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
+      "https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzGBC5xLhLE.woff2": true
     },
     "/": {
       "https://fonts.gstatic.com/s/breeserif/v17/4UaHrEJCrhhnVA3DgluA96rp57F2IwM.woff2": true,
