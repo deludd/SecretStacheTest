@@ -1,39 +1,38 @@
-const delay = ms => new Promise(res => setTimeout(res, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getAllAnimeIDs = async (graphql, maxAnimeCount, currentFilterValue) => {
   const bigPerPage = Math.min(Math.max(6, maxAnimeCount / 10), 50);
+  const requests = [];
   const totalPagesToIterate = Math.ceil(maxAnimeCount / bigPerPage);
-  const allAnime = [];
 
   for (let page = 1; page <= totalPagesToIterate; page++) {
-    const result = await graphql(
-      `
-        query AnimePage($page: Int!, $perPage: Int!, $currentFilterValue: ANILIST_MediaSort) {
-          anilist {
-            Page(page: $page, perPage: $perPage) {
-              media(sort: [$currentFilterValue]) {
-                id
-                title {
-                  userPreferred
+    await delay(2000);
+    requests.push(
+      graphql(
+        `
+          query AnimePage($page: Int!, $perPage: Int!, $currentFilterValue: ANILIST_MediaSort) {
+            anilist {
+              Page(page: $page, perPage: $perPage) {
+                media(sort: [$currentFilterValue]) {
+                  id
+                  title {
+                    userPreferred
+                  }
                 }
               }
             }
           }
-        }
-      `,
-      {
-        page: page,
-        perPage: bigPerPage,
-        currentFilterValue: currentFilterValue,
-      },
+        `,
+        {
+          page: page,
+          perPage: bigPerPage,
+          currentFilterValue: currentFilterValue,
+        },
+      ),
     );
-
-    allAnime.push(...result.data.anilist.Page.media);
-
-    if (page < totalPagesToIterate) {
-      await delay(1300);
-    }
   }
+  const results = await Promise.all(requests);
+  const allAnime = results.flatMap((result) => result.data.anilist.Page.media);
 
   return allAnime.slice(0, maxAnimeCount);
 };
