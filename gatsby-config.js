@@ -19,7 +19,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-preload-fonts`,
-    `gatsby-plugin-react-helmet`,
     `gatsby-transformer-remark`,
     {
       resolve: 'gatsby-source-graphql',
