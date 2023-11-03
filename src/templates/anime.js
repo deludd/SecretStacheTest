@@ -19,6 +19,7 @@ const Anime = ({
     anilist: {
       Page: { media: animeList },
     },
+    allFile: { nodes: imagesData }
   },
   pageContext,
 }) => {
@@ -41,13 +42,15 @@ const Anime = ({
         ))}
       </AnimeFilters>
       <AnimeGrid>
-        {animeList.map((anime) => (
-          <Link to={`${BASE_PATH}/id=${anime.id}`} key={anime.id}>
-            <AnimeCardContainer key={anime.id}>
-              <SingleAnimeCard key={anime.id} data={anime} />
-            </AnimeCardContainer>
-          </Link>
-        ))}
+        {animeList.map((anime) => {
+          return (
+            <Link to={`${BASE_PATH}/id=${anime.id}`} key={anime.id}>
+              <AnimeCardContainer key={anime.id}>
+                <SingleAnimeCard key={anime.id} data={anime} imagesData={imagesData} />
+              </AnimeCardContainer>
+            </Link>
+          );
+        })}
       </AnimeGrid>
       <Pagination currentPage={currentPage} filter={currentFilter.slug} numPages={totalPages} />
     </Layout>
@@ -65,9 +68,14 @@ export const pageQuery = graphql`
           title {
             userPreferred
           }
-          coverImage {
-            large
-          }
+        }
+      }
+    }
+    allFile(filter: { extension: { regex: "/(jpg|jpeg|png)/" }, sourceInstanceName: { eq: "images" } }) {
+      nodes {
+        name
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
         }
       }
     }

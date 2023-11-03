@@ -25,3 +25,5 @@ module.exports.filters = [
     value: 'TRENDING_DESC',
   },
 ];
+
+module.exports.API_URL = 'https://graphql.anilist.co';

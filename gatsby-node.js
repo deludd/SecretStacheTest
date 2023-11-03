@@ -17,6 +17,8 @@ exports.createPages = async ({ graphql, actions }) => {
         animeData.map((anime) => ({
           id: anime.id,
           title: anime.title,
+          bannerImage: anime.bannerImage,
+          coverImage: anime.coverImage
         })),
       );
 
@@ -54,8 +56,19 @@ exports.createPages = async ({ graphql, actions }) => {
     this.searchPipeline.remove(lunr.stemmer);
     this.ref('id');
     this.field('userPreferred');
-    allAnime.forEach((anime) => this.add({ id: String(anime.id), userPreferred: anime.title.userPreferred }));
+    allAnime.forEach((anime) => this.add({ 
+      id: String(anime.id), 
+      userPreferred: anime.title.userPreferred 
+    }));
   });
 
   fs.writeFileSync('public/searchIndex.json', JSON.stringify({ index: idx, allAnime }));
+  const animeDataForFile = allAnime.map(({ id, title, bannerImage, coverImage }) => ({
+    id: id,
+    title: title.userPreferred,
+    bannerImage: bannerImage,
+    coverImage: coverImage.large,
+  }));
+  
+  fs.writeFileSync('public/animeData.json', JSON.stringify(animeDataForFile));
 };

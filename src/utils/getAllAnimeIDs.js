@@ -14,6 +14,10 @@ const getAllAnimeIDs = async (graphql, maxAnimeCount, currentFilterValue) => {
                   title {
                     userPreferred
                   }
+                  bannerImage
+                  coverImage {
+                    large
+                  }
                 }
               }
             }

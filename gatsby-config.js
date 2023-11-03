@@ -1,3 +1,5 @@
+const API_URL = 'https://graphql.anilist.co';
+
 module.exports = {
   siteMetadata: {
     title: `SecretStache Anime Website`,
@@ -10,9 +12,10 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/images/imagesFromAPI`,
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-preload-fonts`,
@@ -31,7 +34,7 @@ module.exports = {
       options: {
         typeName: 'ANILIST',
         fieldName: 'anilist',
-        url: 'https://graphql.anilist.co',
+        url: `${API_URL}`,
         batch: true,
         dataLoaderOptions: {
           maxBatchSize: 10,
