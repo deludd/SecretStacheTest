@@ -1,7 +1,6 @@
 //api url
 export const API_URL = 'https://graphql.anilist.co';
 
-
 //base path
 export const BASE_PATH = '/anime';
 

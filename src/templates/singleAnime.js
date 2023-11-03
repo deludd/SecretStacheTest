@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import parse from 'html-react-parser';
 import Seo from '../components/seo';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import {
   AnimeContainer,
   AnimeTitle,
@@ -15,12 +15,13 @@ import {
   BackButtonOnBanner,
   AnimeTitleOnBanner,
 } from '../styles/SingleAnimePageStyles';
-import animeData from '../../public/animeData.json';
+
+import { findImageByName } from '../utils/findImageByName';
 
 const SingleAnime = ({
   data: {
     anilist: { Media: anime },
-    allFile: { nodes: imagesData }
+    allFile: { nodes: imagesData },
   },
 }) => {
   const {
@@ -30,18 +31,8 @@ const SingleAnime = ({
     description,
   } = anime;
 
-  const localAnimeData = animeData.find(a => a.id === currentId);
-  if (!localAnimeData) {
-    console.error(`No local data found for anime ID: ${currentId}`);
-  }
-
-  const findImageByName = name => {
-    const fileNode = imagesData.find(node => node.name === name);
-    return fileNode ? getImage(fileNode) : null;
-  };
-
-  const bannerImage = findImageByName(`banner_${currentId}`);
-  const coverImage = findImageByName(`cover_${currentId}`);
+  const bannerImage = findImageByName(`banner_${currentId}`, imagesData);
+  const coverImage = findImageByName(`cover_${currentId}`, imagesData);
 
   const formattedDate = `${startDate.year}-${startDate.month}-${startDate.day}`;
 
@@ -50,19 +41,15 @@ const SingleAnime = ({
       <Seo title={userPreferred} />
       <AnimeContainer>
         {bannerImage ? (
-          <>
-            <BannerContainer>
-              <BannerImage image={bannerImage} alt={userPreferred} />
-              <AnimeTitleOnBanner>{userPreferred}</AnimeTitleOnBanner>
-              <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
-            </BannerContainer>
-          </>
+          <BannerContainer>
+            <BannerImage image={bannerImage} alt={userPreferred} />
+            <AnimeTitleOnBanner>{userPreferred}</AnimeTitleOnBanner>
+            <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
+          </BannerContainer>
         ) : (
-          <>
-            <BackButton onClick={() => window.history.back()}>Back</BackButton>
-            <AnimeTitle>{userPreferred}</AnimeTitle>
-          </>
+          <BackButton onClick={() => window.history.back()}>Back</BackButton>
         )}
+        <AnimeTitle>{userPreferred}</AnimeTitle>
         <GatsbyImage image={coverImage} alt={userPreferred} />
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{description ? parse(description) : ''}</AnimeDescription>

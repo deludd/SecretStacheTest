@@ -2,24 +2,18 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
+import Filters from '../components/filters';
 import SingleAnimeCard from '../components/singleAnimeCard';
 import Pagination from '../components/paginationBar';
 import { BASE_PATH } from '../utils/constants.es6';
-import {
-  AnimeGrid,
-  AnimeCardContainer,
-  AnimeFilters,
-  AnimeFilterItem,
-  AnimeFilterLink,
-} from '../styles/AnimePageStyles';
-import { filters } from '../utils/constants.es6.js';
+import { AnimeGrid, AnimeCardContainer, AnimeFilters } from '../styles/AnimePageStyles';
 
 const Anime = ({
   data: {
     anilist: {
       Page: { media: animeList },
     },
-    allFile: { nodes: imagesData }
+    allFile: { nodes: imagesData },
   },
   pageContext,
 }) => {
@@ -29,17 +23,7 @@ const Anime = ({
     <Layout>
       <Seo title="Anime" />
       <AnimeFilters>
-        {filters.map(({ label, slug, value }) => (
-          <AnimeFilterItem key={value}>
-            <AnimeFilterLink
-              key={value}
-              to={`${BASE_PATH}/${slug}/page=1`}
-              className={currentFilter.slug === slug ? 'activeFilter' : ''}
-            >
-              {label}
-            </AnimeFilterLink>
-          </AnimeFilterItem>
-        ))}
+        <Filters currentSlug={currentFilter.slug} />
       </AnimeFilters>
       <AnimeGrid>
         {animeList.map((anime) => {

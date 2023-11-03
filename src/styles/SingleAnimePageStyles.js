@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
-
 export const AnimeContainer = styled.div`
   position: relative;
   background-color: #fff;
