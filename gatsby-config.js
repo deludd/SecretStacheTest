@@ -1,12 +1,3 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
- */
-
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
 module.exports = {
   siteMetadata: {
     title: `SecretStache Anime Website`,
@@ -15,23 +6,17 @@ module.exports = {
     siteUrl: `https://your-site-url.com/`,
   },
   plugins: [
-    `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-preload-fonts`,
     `gatsby-transformer-remark`,
-    {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'ANILIST',
-        fieldName: 'anilist',
-        url: 'https://graphql.anilist.co',
-        batch: true,
-        dataLoaderOptions: {
-          maxBatchSize: 10,
-        },
-      },
-    },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
@@ -42,31 +27,15 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-graphql-image',
+      resolve: 'gatsby-source-graphql',
       options: {
-        schemaName: 'ANILIST',
-        imageFieldName: 'bannerImage',
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-graphql-image',
-      options: {
-        schemaName: 'ANILIST',
-        imageFieldName: 'large',
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages`,
+        typeName: 'ANILIST',
+        fieldName: 'anilist',
+        url: 'https://graphql.anilist.co',
+        batch: true,
+        dataLoaderOptions: {
+          maxBatchSize: 10,
+        },
       },
     },
     {

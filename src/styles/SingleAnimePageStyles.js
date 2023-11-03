@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { GatsbyImage } from 'gatsby-plugin-image';
 
 export const AnimeContainer = styled.div`
   position: relative;
@@ -17,7 +16,7 @@ export const BannerContainer = styled.div`
   margin: -20px -20px 20px -20px;
 `;
 
-export const BannerImage = styled(GatsbyImage)`
+export const BannerImage = styled.img`
   width: 100%;
   height: 100%;
   display: block;

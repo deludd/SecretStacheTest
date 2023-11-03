@@ -67,11 +67,6 @@ export const pageQuery = graphql`
           }
           coverImage {
             large
-            largeSharp {
-              childImageSharp {
-                gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
-              }
-            }
           }
         }
       }

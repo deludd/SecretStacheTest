@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
-import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 import parse from 'html-react-parser';
 import Seo from '../components/seo';
 import {
@@ -25,12 +24,10 @@ const SingleAnime = ({
   const {
     title: { userPreferred },
     startDate,
-    bannerImageSharp,
-    coverImage,
+    bannerImage,
+    coverImage: { large: coverImage },
     description,
   } = anime;
-  const imageBanner = getImage(bannerImageSharp?.childImageSharp.gatsbyImageData);
-  const imageAvatar = getImage(coverImage.largeSharp.childImageSharp.gatsbyImageData);
   const currentId = anime.id;
 
   if (errors) {
@@ -48,10 +45,10 @@ const SingleAnime = ({
     <Layout currentId={currentId}>
       <Seo title={userPreferred} />
       <AnimeContainer>
-        {bannerImageSharp ? (
+        {bannerImage ? (
           <>
             <BannerContainer>
-              <BannerImage image={imageBanner} alt={userPreferred} />
+              <BannerImage src={bannerImage} alt={userPreferred}/>
               <AnimeTitleOnBanner>{userPreferred}</AnimeTitleOnBanner>
               <BackButtonOnBanner onClick={() => window.history.back()}>Back</BackButtonOnBanner>
             </BannerContainer>
@@ -62,7 +59,7 @@ const SingleAnime = ({
             <AnimeTitle>{userPreferred}</AnimeTitle>
           </>
         )}
-        <GatsbyImage image={imageAvatar} alt={userPreferred} />
+        <img src={coverImage} alt={userPreferred}/>
         <AnimeDate>Start Date: {formattedDate}</AnimeDate>
         <AnimeDescription>{description ? parse(description) : ''}</AnimeDescription>
       </AnimeContainer>
@@ -86,18 +83,8 @@ export const pageQuery = graphql`
           day
         }
         bannerImage
-        bannerImageSharp {
-          childImageSharp {
-            gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED)
-          }
-        }
         coverImage {
           large
-          largeSharp {
-            childImageSharp {
-              gatsbyImageData(formats: [AUTO, WEBP, AVIF], placeholder: BLURRED, layout: FIXED)
-            }
-          }
         }
         description
       }
